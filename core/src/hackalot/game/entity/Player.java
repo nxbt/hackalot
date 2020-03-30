@@ -2,6 +2,11 @@ package hackalot.game.entity;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Will represent the player
+ * @author HANHAN
+ *
+ */
 public class Player extends Character {
 
 	public Player(Vector2 position, Vector2 velocity) {
