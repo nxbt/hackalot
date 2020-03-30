@@ -3,6 +3,7 @@ package hackalot.game.map;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
@@ -30,6 +31,10 @@ public class Map {
 				tilemap[x][y] = new Tile(sprite, x, y);
 				actor.addActor(tilemap[x][y].getActor());
 			}
+	}
+	
+	public Tile getTile(int x, int y) {
+		return tilemap[x][y];
 	}
 	
 	public Actor getActor() {

@@ -1,4 +1,4 @@
-package hackalot.game.map;
+package hackalot.game.crafting;
 
 public interface Craftable {
 

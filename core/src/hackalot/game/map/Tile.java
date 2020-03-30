@@ -8,9 +8,10 @@ import hackalot.game.SpriteActor;
 public class Tile {
 	
 	private String name;
+
 	private Actor actor;
 	
-	//private Item item;
+	private Item item;
 	private Building building;
 	
 	public Tile(Sprite sprite, int x, int y) {
@@ -31,5 +32,29 @@ public class Tile {
 	
 	public Actor getActor() {
 		return actor;
+	}
+	
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
+
+	public Building getBuilding() {
+		return building;
+	}
+
+	public void setBuilding(Building building) {
+		this.building = building;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }
