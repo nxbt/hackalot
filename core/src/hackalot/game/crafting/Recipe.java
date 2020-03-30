@@ -1,7 +1,5 @@
 package hackalot.game.crafting;
 
-import com.badlogic.gdx.math.Vector2;
-
 import hackalot.game.map.Map;
 
 public class Recipe {
