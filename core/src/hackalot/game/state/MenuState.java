@@ -15,4 +15,14 @@ public class MenuState extends State {
 	public void draw() {
 
 	}
+
+	@Override
+	public void dispose() {
+
+	}
+
+	@Override
+	public void resize( int width, int height ) {
+
+	}
 }
