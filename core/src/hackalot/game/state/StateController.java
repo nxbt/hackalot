@@ -6,7 +6,7 @@ public class StateController {
 
 	public StateController() {
 
-		this.state = new MenuState();
+		this.state = new PlayState();
 	}
 
 	public void changeState( State newState ) {
@@ -20,5 +20,13 @@ public class StateController {
 
 	public void draw() {
 		state.draw();
+	}
+
+	public void resize( int width, int height ) {
+		state.resize( width, height );
+	}
+
+	public void dispose() {
+		state.dispose();
 	}
 }
