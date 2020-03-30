@@ -29,6 +29,10 @@ public class Tile {
 		return this.building != null;
 	}
 	
+	public Building getBuilding() {
+		return building;
+	}
+	
 	public Actor getActor() {
 		return actor;
 	}
