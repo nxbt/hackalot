@@ -24,11 +24,11 @@ public class Enemy extends Character {
 	/**
 	 * Takes in tile infront of enemy and attacks only if tile has building
 	 */
-	private void attack(Tile tileAhead) {
-		
-		if (tileAhead.hasBuilding) {
-			tileAhead.getBuilding().setHealth -= damage;
-		}
-		
-	}
+//	private void attack(Tile tileAhead) {
+//		
+//		if (tileAhead.hasBuilding) {
+//			tileAhead.getBuilding().setHealth -= damage;
+//		}
+//		
+//	}
 }

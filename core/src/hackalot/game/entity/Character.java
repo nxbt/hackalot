@@ -11,8 +11,8 @@ public class Character extends Entity {
 	
 	private String name;
 	private int HP; 
-	private Item item;
-	private Controller controller;
+//	private Item item;
+//	private Controller controller;
 	
 	
 	//Super Constructor
@@ -42,16 +42,16 @@ public class Character extends Entity {
 	 */
 	
 	
-	public Tile getTileAhead() {
-		return new Tile();
-	}
-	
-	
-	public void setItem(Item item) {
-		this.item = item; 
-	}
-	public Item getItem() {
-		return item;
-	}
+//	public Tile getTileAhead() {
+//		return new Tile();
+//	}
+//	
+//	
+//	public void setItem(Item item) {
+//		this.item = item; 
+//	}
+//	public Item getItem() {
+//		return item;
+//	}
 
 }
