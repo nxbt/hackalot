@@ -9,28 +9,27 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import hackalot.game.map.Map;
 import hackalot.game.state.StateController;
 
+import static hackalot.game.ref.Ref.R;
+
+
 public class GameMain extends ApplicationAdapter {
-	private StateController sc;
 	
 	@Override
-	public void create () {
-		
-		sc = new StateController();
-	}
+	public void create () { }
 	
 	@Override
 	public void resize(int width, int height) {
-		sc.resize( width, height );
+		R.sc.resize( width, height );
 	}
 
 	@Override
 	public void render() {
-		sc.tick();
-		sc.draw();
+		R.sc.tick();
+		R.sc.draw();
 	}
 	
 	@Override
 	public void dispose () {
-		sc.dispose();
+		R.sc.dispose();
 	}
 }
