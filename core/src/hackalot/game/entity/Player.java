@@ -24,20 +24,34 @@ public class Player extends Character {
 	 * returns false if pick up unsuccessful
 	 * @param item
 	 */
-	/*
 	private boolean pickUp(Tile tile) {
-		return false;
+		if (!tile.isEmpty()) {
+			setItem(tile.getItem());
+			tile.setItem(null);
+			
+			return true;
+		}
+		
+		return false; //cannot pick up; tile empty;
 	}
-	*/
 	
 	
 	/**
-	 * Drop item in hand
+	 * Drop item in hand onto ahead tile
 	 * True if dropped, false if failed
 	 * @return
 	 */
 	private boolean drop() {
+		Item itemInHand = getItem();
+		Tile tileAhead = getTileAhead();
+		
+		if (tileAhead.isEmpty()) {
+			setItem(null);
+			tileAhead.setItem(itemInHand);
+			return true;
+		}
 		return false;
+		
 	}
 
 	private void interact() {

@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Sheep extends Animal {
 
-	private boolean isSheared; //is the sheep sheared?
+	private boolean sheared; //is the sheep sheared?
 	
 	public Sheep(Vector2 position, Vector2 velocity) {
 		super(position, velocity);
@@ -19,5 +19,13 @@ public class Sheep extends Animal {
 	public Sheep(Vector2 position, Vector2 velocity, String name, int HP) {
 		super(position, velocity, name, HP);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public boolean getSheared() {
+		return sheared;
+	}
+	
+	public void setSheared(Boolean sheared) {
+		this.sheared = sheared;
 	}
 }

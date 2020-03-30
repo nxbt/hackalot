@@ -21,16 +21,23 @@ public class Entity {
 	}
 	
 	
+	private void update() {
+		
+	}
 	
+	private void draw() {
+		
+	}
 	
+	public Vector2 getPosition() {
+		return position;
+	}
+	public void setPosition(Vector2 position) {
+		this.position = position;
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	public void accelerate(Vector2 acceleration) {
+		velocity.add(acceleration).limit(1); 
+	}
 	
 }

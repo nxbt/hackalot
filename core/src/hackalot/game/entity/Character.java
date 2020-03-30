@@ -11,8 +11,8 @@ public class Character extends Entity {
 	
 	private String name;
 	private int HP; 
-	// private Item heldItem;
-	// private Controller controller;
+	private Item item;
+	private Controller controller;
 	
 	
 	//Super Constructor
@@ -33,7 +33,7 @@ public class Character extends Entity {
 	 * @param velocity
 	 */
 	private void move(Vector2 velocity) {
-
+		setPosition(getPosition().add(velocity));
 	}
 	
 	/**
@@ -41,12 +41,17 @@ public class Character extends Entity {
 	 * @return Tile 
 	 */
 	
-	/*
+	
 	public Tile getTileAhead() {
-		
+		return new Tile();
 	}
-	*/
 	
 	
+	public void setItem(Item item) {
+		this.item = item; 
+	}
+	public Item getItem() {
+		return item;
+	}
 
 }

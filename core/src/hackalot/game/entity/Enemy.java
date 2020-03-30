@@ -9,6 +9,8 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Enemy extends Character {
 
+	private int damage = 1; // hard coded damage parameter
+	
 	public Enemy(Vector2 position, Vector2 velocity) {
 		super(position, velocity);
 		// TODO Auto-generated constructor stub
@@ -20,11 +22,13 @@ public class Enemy extends Character {
 
 	
 	/**
-	 * Takes in tile infront of enemy and attacks 
+	 * Takes in tile infront of enemy and attacks only if tile has building
 	 */
-	/*
 	private void attack(Tile tileAhead) {
 		
+		if (tileAhead.hasBuilding) {
+			tileAhead.getBuilding().setHealth -= damage;
+		}
+		
 	}
-	*/
 }
