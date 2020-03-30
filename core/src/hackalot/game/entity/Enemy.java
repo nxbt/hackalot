@@ -2,6 +2,8 @@ package hackalot.game.entity;
 
 import com.badlogic.gdx.math.Vector2;
 
+import hackalot.game.map.*;
+
 /**
  * Class that contains functionality for the enemies that attack
  * @author HANHAN
@@ -24,11 +26,12 @@ public class Enemy extends Character {
 	/**
 	 * Takes in tile infront of enemy and attacks only if tile has building
 	 */
-//	private void attack(Tile tileAhead) {
-//		
-//		if (tileAhead.hasBuilding) {
-//			tileAhead.getBuilding().setHealth -= damage;
-//		}
-//		
-//	}
+	private void attack(Tile tileAhead) {
+		
+		if (tileAhead.hasBuilding()) {
+			Building building = tileAhead.getBuilding();
+			building.setHealth(building.getHealth() - damage);
+		}
+		
+	}
 }

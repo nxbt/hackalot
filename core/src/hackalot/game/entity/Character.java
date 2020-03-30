@@ -2,6 +2,8 @@ package hackalot.game.entity;
 
 import com.badlogic.gdx.math.Vector2;
 
+import hackalot.game.map.Tile;
+
 /**
  * Parent class for Player, Enemy, and Animal. Has main functionality for our characters
  * @author HANHAN
@@ -40,11 +42,10 @@ public class Character extends Entity {
 	 * Returns the tile 1 tile in the direction of the velocity.
 	 * @return Tile 
 	 */
-	
-	
-//	public Tile getTileAhead() {
-//		return new Tile();
-//	}
+	public Tile getTileAhead() {
+		
+		return null; 
+	}
 //	
 //	
 //	public void setItem(Item item) {
