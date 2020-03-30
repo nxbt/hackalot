@@ -19,7 +19,7 @@ public class Character extends Entity {
 	
 	//Super Constructor
 	public Character(Vector2 position, Vector2 velocity) {
-		super(position, velocity);
+		super(position, new Vector2(0,0));
 		// TODO Auto-generated constructor stub
 	}
 	

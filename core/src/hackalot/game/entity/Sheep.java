@@ -12,7 +12,7 @@ public class Sheep extends Animal {
 	private boolean sheared; //is the sheep sheared?
 	
 	public Sheep(Vector2 position, Vector2 velocity) {
-		super(position, velocity);
+		super(position, new Vector2(0,0));
 		// TODO Auto-generated constructor stub
 	}
 

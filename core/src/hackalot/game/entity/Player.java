@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Player extends Character {
 
 	public Player(Vector2 position, Vector2 velocity) {
-		super(position, velocity);
+		super(position, new Vector2(0,0));
 		// TODO Auto-generated constructor stub
 	}
 	

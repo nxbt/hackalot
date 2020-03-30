@@ -17,7 +17,7 @@ public class Entity {
 	public Entity(Vector2 position, Vector2 velocity) {
 		
 		this.position = position; 
-		this.velocity = velocity;		
+		this.velocity = new Vector2(0,0);		
 	}
 	
 	
