@@ -24,6 +24,10 @@ public class Tile {
 		//return this.item != null;
 		return false; // delete later
 	}
+
+	public String getName(){
+		return this.name;
+	}
 	
 	public boolean hasBuilding() {
 		return this.building != null;
