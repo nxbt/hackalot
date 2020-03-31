@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 
 import hackalot.game.SpriteActor;
 import hackalot.game.item.Item;
+import hackalot.game.item.Resource;
 
 public class Tile {
 	
@@ -13,18 +14,24 @@ public class Tile {
 
 	private Group actor;
 	
+	private Actor tileActor;
+	private Actor itemActor;
+	private Actor buildingTileActor;
+	
 	private Item item;
 	
 	private BuildingTile buildingTile;
 	
 	public Tile(Sprite sprite, int x, int y) {
 		actor = new Group();
-		Actor tileActor = new SpriteActor(sprite);
+		
+		tileActor = new SpriteActor(sprite);
 		tileActor.setZIndex(1);
-		actor.addActor(tileActor);
-		actor.setPosition(32*x, 32*y); // in future, 32 should be Resources.TILE_SIZE
 		tileActor.setWidth(32);
 		tileActor.setHeight(32);
+		
+		actor.addActor(tileActor);
+		actor.setPosition(32*x, 32*y); // in future, 32 should be Resources.TILE_SIZE
 	}
 	
 	public Actor getActor() {
@@ -41,16 +48,17 @@ public class Tile {
 	}
 
 	public void setItem(Item item) {
-		System.out.println("Set item to wood");
-		if(this.item != null) actor.removeActor(this.item.getActor());
+		System.out.println("Set item to " + (item == null ? "Null" : ((Resource) item).getName()));
+		if(this.item != null) actor.removeActor(this.itemActor);
 		this.item = item;
 		if(this.item != null) {
-			Actor itemActor = this.item.getActor();
+			itemActor = this.item.getActor();
 			itemActor.setWidth(32);
 			itemActor.setHeight(32);
+			itemActor.setZIndex(0);
+			
 			actor.addActor(itemActor);
 		}
-		actor.setZIndex(0);
 	}
 	
 	public boolean hasBuildingTile() {
@@ -62,6 +70,17 @@ public class Tile {
 	}
 
 	public void setBuildingTile(BuildingTile buildingTile) {
+		System.out.println("Setting builing to wall.");
+		if(this.buildingTile != null) actor.removeActor(this.buildingTileActor);
+		this.buildingTile = buildingTile;
+		if(this.buildingTile != null) {
+			buildingTileActor = this.buildingTile.getActor();
+			buildingTileActor.setWidth(32);
+			buildingTileActor.setHeight(32);
+			buildingTileActor.setZIndex(0);
+			
+			actor.addActor(buildingTileActor);
+		}
 		this.buildingTile = buildingTile;
 	}
 

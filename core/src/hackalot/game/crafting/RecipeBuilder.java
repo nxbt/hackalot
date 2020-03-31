@@ -3,6 +3,9 @@ package hackalot.game.crafting;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 import hackalot.game.item.Item;
 import hackalot.game.item.Resource;
 import hackalot.game.map.BuildingTile;
@@ -52,7 +55,7 @@ public class RecipeBuilder {
 		RecipeBuilder builder = new RecipeBuilder(wood);
 		
 		TileMatcher woodMatcher = new TileMatcher(null, wood, null);
-		TileUpdater barnUpdater = new TileUpdater("grass", null, new BuildingTile("barnWall"));
+		TileUpdater barnUpdater = new TileUpdater("grass", null, new BuildingTile("barnWall", new TextureRegion(new Texture("tilemap.png"), 0, 0, 32, 32)));
 		
 		builder.addInfo(0, 0, woodMatcher, barnUpdater);
 		builder.addInfo(0, 1, woodMatcher, barnUpdater);

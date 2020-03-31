@@ -22,6 +22,10 @@ public class Resource extends Item{
 		Resource other = (Resource) obj;
 		return resourceName.equals(other.resourceName);
 	}
+	
+	public String getName() {
+		return this.resourceName;
+	}
 
 
 }

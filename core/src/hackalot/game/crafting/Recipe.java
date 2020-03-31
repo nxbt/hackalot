@@ -65,6 +65,7 @@ public class Recipe {
 			int xOffset = xOffsets[i];
 			int yOffset = yOffsets[i];
 			
+			System.out.println("Updating tile " + (x + xOffset) + " " + (y + yOffset));
 			updaters[i].update(map.getTile(x + xOffset, y + yOffset));
 			map.updateTile(x + xOffset, y + yOffset);
 			

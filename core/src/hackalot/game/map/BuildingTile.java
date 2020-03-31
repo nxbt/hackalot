@@ -1,5 +1,10 @@
 package hackalot.game.map;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+
+import hackalot.game.SpriteActor;
 import hackalot.game.item.Item;
 
 //single tile of a building
@@ -9,10 +14,12 @@ public class BuildingTile {
 	private int HP;
 	private Item dropItem; // item that should drop when this buildingTile is deconstructed.
 	private boolean destroyed;
+	private TextureRegion textureRegion;
 	
-	public BuildingTile(String name) {
+	public BuildingTile(String name, TextureRegion textureRegion) {
 		this.name = name;
 		destroyed = false;
+		this.textureRegion = textureRegion;
 	}
 	
 	public void setBuilding(Building building) {
@@ -34,6 +41,10 @@ public class BuildingTile {
 	
 	public int getHealth() {
 		return HP;
+	}
+
+	public Actor getActor() {
+		return new SpriteActor(new Sprite(textureRegion));
 	}
 	
 }
