@@ -7,41 +7,29 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import hackalot.game.map.Map;
+import hackalot.game.state.StateController;
+
+import static hackalot.game.ref.Ref.R;
+
 
 public class GameMain extends ApplicationAdapter {
-	private Stage stage;
-	private Map map;
 	
 	@Override
-	public void create () {
-		
-		stage = new Stage(new ScreenViewport());
-		
-		map = new Map(100, 100);
-		
-		stage.addActor(map.getActor());
-	}
+	public void create () { }
 	
 	@Override
 	public void resize(int width, int height) {
-		stage.getViewport().update(width, height, true);
+		R.sc.resize( width, height );
 	}
 
 	@Override
 	public void render() {
-		float delta = Gdx.graphics.getDeltaTime();
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		stage.act(delta);
-		stage.draw();
-//		Gdx.gl.glClearColor(1, 0, 0, 1);
-//		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-//		batch.begin();
-//		batch.draw(img, 0, 0);
-//		batch.end();
+		R.sc.tick();
+		R.sc.draw();
 	}
 	
 	@Override
 	public void dispose () {
-		stage.dispose();
+		R.sc.dispose();
 	}
 }
