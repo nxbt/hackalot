@@ -3,8 +3,10 @@ package hackalot.game.crafting;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
+
 import hackalot.game.item.Item;
-import hackalot.game.map.Blueprint;
 import hackalot.game.map.Map;
 
 public class RecipeManager {
@@ -27,12 +29,22 @@ public class RecipeManager {
 			if(!blueprint.isValid(map)) {
 				blueprints.remove(i);
 				i--;
+				System.out.println("Blueprint Destroyed!");
 			}
 		}
 		
 		// second, check for new blueprints from recipes
+		
 		for(Recipe recipe: recipes) {
-			if(recipe.matches(map, x, y)) blueprints.add(recipe.getBlueprint());
+			System.out.println("Checking Recipe");
+			for(int[] coords: recipe.getAffectedTiles(x, y)) {
+				System.out.println("Tile Affected: " + coords[0] + ", " + coords[1]);
+				if(recipe.matches(map, coords[0], coords[1])) {
+					System.out.println("Recipe Matches");
+					blueprints.add(recipe.getBlueprint(coords[0], coords[1]));
+					System.out.println("Blueprint Created!");
+				}
+			}
 		}
 		
 	}

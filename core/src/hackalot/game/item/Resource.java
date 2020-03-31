@@ -9,13 +9,19 @@ public class Resource extends Item{
     private Tile location;
     private Action action;
 
-    public Resource(String imageFilePath, String resourceName, int reasourceSize, Tile location, Action action){
+    public Resource(String imageFilePath, String resourceName, int reasourceSize, Tile location, Action action) {
         super(imageFilePath);
         this.resourceName = resourceName;
         this.reasourceSize = reasourceSize;
         this.location = location;
         this.action = action;
     }
+	
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Resource)) return false;
+		Resource other = (Resource) obj;
+		return resourceName.equals(other.resourceName);
+	}
 
 
 }
