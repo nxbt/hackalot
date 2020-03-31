@@ -65,11 +65,11 @@ public class Recipe {
 			int xOffset = xOffsets[i];
 			int yOffset = yOffsets[i];
 			
-			updaters[i].update(map.getTile(xOffset, yOffset));
-			map.updateTile(xOffset, yOffset);
+			updaters[i].update(map.getTile(x + xOffset, y + yOffset));
+			map.updateTile(x + xOffset, y + yOffset);
 			
 			// TODO: doesn't support recipe pieces that require an item to be on a tile but don't place a building on that tile.
-			buildingTiles[i] = map.getTile(xOffset, yOffset).getBuildingTile();
+			buildingTiles[i] = map.getTile(x + xOffset, y + yOffset).getBuildingTile();
 		}
 		
 		return new Building(buildingTiles);
