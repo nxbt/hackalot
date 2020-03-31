@@ -2,6 +2,7 @@ package hackalot.game.entity;
 
 import com.badlogic.gdx.math.Vector2;
 
+import hackalot.game.item.Item;
 import hackalot.game.map.Tile;
 
 /**
@@ -13,7 +14,7 @@ public class Character extends Entity {
 	
 	private String name;
 	private int HP; 
-//	private Item item;
+	private Item item;
 //	private Controller controller;
 	
 	
@@ -48,11 +49,11 @@ public class Character extends Entity {
 	}
 //	
 //	
-//	public void setItem(Item item) {
-//		this.item = item; 
-//	}
-//	public Item getItem() {
-//		return item;
-//	}
+	public void setItem(Item item) {
+		this.item = item;
+	}
+	public Item getItem() {
+		return item;
+	}
 
 }
