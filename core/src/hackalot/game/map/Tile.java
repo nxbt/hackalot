@@ -12,7 +12,7 @@ public class Tile {
 	private Actor actor;
 	
 	private Item item;
-	private Building building;
+	private BuildingTile buildingTile;
 	
 	public Tile(Sprite sprite, int x, int y) {
 		actor = new SpriteActor(sprite);
@@ -27,7 +27,7 @@ public class Tile {
 	}
 	
 	public boolean hasBuilding() {
-		return this.building != null;
+		return this.buildingTile != null;
 	}
 	
 	public Actor getActor() {
@@ -42,12 +42,12 @@ public class Tile {
 		this.item = item;
 	}
 
-	public Building getBuilding() {
-		return building;
+	public BuildingTile getBuildingTile() {
+		return buildingTile;
 	}
 
-	public void setBuilding(Building building) {
-		this.building = building;
+	public void setBuildingTile(BuildingTile buildingTile) {
+		this.buildingTile = buildingTile;
 	}
 
 	public String getName() {

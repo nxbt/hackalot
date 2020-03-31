@@ -3,9 +3,10 @@ package hackalot.game.map;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+
+import hackalot.game.crafting.RecipeManager;
 
 public class Map {
 	
@@ -20,7 +21,12 @@ public class Map {
 	
 	private Tile[][] tilemap;
 	
+	private RecipeManager manager;
+	
 	public Map(int width, int height)  {
+		
+		manager = new RecipeManager();
+		
 		actor = new Group();
 		this.tilemap = new Tile[width][height];
 		this.width = width;
@@ -31,6 +37,10 @@ public class Map {
 				tilemap[x][y] = new Tile(sprite, x, y);
 				actor.addActor(tilemap[x][y].getActor());
 			}
+	}
+	
+	public Tile updateTile(int x, int y) {
+		
 	}
 	
 	public Tile getTile(int x, int y) {
