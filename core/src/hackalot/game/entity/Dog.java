@@ -11,8 +11,8 @@ public class Dog extends Animal {
 	
 	
 	
-	public Dog(Vector2 position, Vector2 velocity) {
-		super(position, velocity);
+	public Dog( Vector2 position ) {
+		super( position );
 		// TODO Auto-generated constructor stub
 		
 	}
@@ -20,5 +20,10 @@ public class Dog extends Animal {
 	public Dog(Vector2 position, Vector2 velocity, String name, int HP) {
 		super(position, velocity, name, HP);
 		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void tick() {
+
 	}
 }

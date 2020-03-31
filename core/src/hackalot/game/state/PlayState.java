@@ -1,43 +1,48 @@
 package hackalot.game.state;
 
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import hackalot.game.entity.Entity;
+import hackalot.game.entity.Player;
 import hackalot.game.map.Map;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static hackalot.game.ref.Ref.R;
 
 public class PlayState extends State {
 
-	private Stage stage;
 	private Map map;
-//	private ArrayList<Entity> entities;
+	private List<Entity> entities;
 
 	public PlayState() {
-		stage = new Stage( new ScreenViewport() );
+		R.stage.setViewport( new ScreenViewport() );
 
 		map = new Map(100, 100 );
-//		entities = new ArrayList<Entity>();
+		entities = new ArrayList<Entity>();
 
-		stage.addActor( map.getActor() );
+		R.stage.addActor( map.getActor() );
+		entities.add( new Player( new Vector2( 3, 3 ) ) );
 	}
 
 	@Override
 	public void tick() {
-		stage.act();
+		R.stage.act();
 	}
 
 	@Override
 	public void draw() {
-		stage.draw();
+		R.stage.draw();
 	}
 
 	@Override
-	public void dispose() {
-		stage.dispose();
-	}
+	public void dispose() {}
 
 	@Override
-	public void resize( int width, int height ) {
-		stage.getViewport().update(width, height, true);
-	}
+	public void resize( int width, int height ) {}
 
 
 }

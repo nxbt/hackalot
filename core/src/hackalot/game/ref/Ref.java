@@ -2,6 +2,7 @@ package hackalot.game.ref;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import hackalot.game.state.StateController;
 
 public class Ref {
@@ -9,14 +10,15 @@ public class Ref {
 
 	public final State state;
 	public final Key key;
+	public final Player player;
 
-	public final StateController sc;
+	public StateController sc;
+	public Stage stage;
 
 	public Ref() {
 		state = new State();
 		key = new Key();
-
-		sc = new StateController();
+		player = new Player();
 	}
 
 
