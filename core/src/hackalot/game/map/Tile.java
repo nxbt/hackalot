@@ -4,13 +4,14 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import hackalot.game.SpriteActor;
+import hackalot.game.item.Item;
 
 public class Tile {
 	
 	private String name;
 	private Actor actor;
 	
-	//private Item item;
+	private Item item;
 	private Building building;
 	
 	public Tile(Sprite sprite, int x, int y) {
@@ -23,6 +24,10 @@ public class Tile {
 	public boolean hasItem() {
 		//return this.item != null;
 		return false; // delete later
+	}
+
+	public void setItem(Item item){
+		this.item = item;
 	}
 
 	public String getName(){

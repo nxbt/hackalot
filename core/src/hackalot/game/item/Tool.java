@@ -20,7 +20,7 @@ public class Tool extends Item{
         return compatibleTiles;
     }
 
-    public void Interact(Tile tile){
+    public void interact(Tile tile){
         if(this.toolName == "axe"){
             action.doChop(this.compatibleTiles, tile);
         }

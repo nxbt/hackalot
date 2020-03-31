@@ -1,6 +1,7 @@
 package hackalot.game.entity;
 
 import com.badlogic.gdx.math.Vector2;
+import hackalot.game.item.Item;
 
 /**
  * Will represent the player
@@ -34,6 +35,14 @@ public class Player extends Character {
 //		
 //		return false; //cannot pick up; tile empty;
 //	}
+//
+	private boolean recieveItem(Item item){
+		if(getItem() == null){
+			setItem(item);
+			return true;
+		}
+		return false;
+	}
 	
 	
 	/**

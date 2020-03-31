@@ -17,9 +17,5 @@ public class Resource extends Item{
         this.action = action;
     }
 
-    public void Interact(Tile tile){
-        if(!tile.hasItem()){
-            action.putDownItem(tile);
-        }
-    }
+
 }
