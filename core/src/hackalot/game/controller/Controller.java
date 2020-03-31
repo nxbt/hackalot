@@ -27,6 +27,14 @@ public abstract class Controller {
 		inputActionMap.put( name, action );
 	}
 
+	public void risingInputAction( String name ) {
+		inputActionMap.get( name ).risingEdge();
+	}
+
+	public void fallingInputAction( String name ) {
+		inputActionMap.get( name ).fallingEdge();
+	}
+
 	public boolean getInputAction( String name ) {
 		return inputActionMap.get( name ).getActive();
 	}

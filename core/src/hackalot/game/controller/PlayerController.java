@@ -20,14 +20,6 @@ public class PlayerController extends Controller {
 		return inputListener;
 	}
 
-	public void risingInputAction( String name ) {
-		inputActionMap.get( name ).risingEdge();
-	}
-
-	public void fallingInputAction( String name ) {
-		inputActionMap.get( name ).fallingEdge();
-	}
-
 	@Override
 	public void updateDirection() {
 		direction.set( inputListener.getDirection() );
