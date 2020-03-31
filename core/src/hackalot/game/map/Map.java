@@ -39,7 +39,7 @@ public class Map {
 			}
 	}
 	
-	public Tile updateTile(int x, int y) {
+	public void updateTile(int x, int y) {
 		
 	}
 	

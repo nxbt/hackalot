@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import hackalot.game.SpriteActor;
+import hackalot.game.item.Item;
 
 public class Tile {
 	
@@ -12,6 +13,7 @@ public class Tile {
 	private Actor actor;
 	
 	private Item item;
+	
 	private BuildingTile buildingTile;
 	
 	public Tile(Sprite sprite, int x, int y) {
@@ -21,17 +23,13 @@ public class Tile {
 		actor.setHeight(32);
 	}
 	
+	public Actor getActor() {
+		return actor;
+	}
+	
 	public boolean hasItem() {
 		//return this.item != null;
 		return false; // delete later
-	}
-	
-	public boolean hasBuilding() {
-		return this.buildingTile != null;
-	}
-	
-	public Actor getActor() {
-		return actor;
 	}
 	
 	public Item getItem() {
@@ -40,6 +38,10 @@ public class Tile {
 
 	public void setItem(Item item) {
 		this.item = item;
+	}
+	
+	public boolean hasBuildingTile() {
+		return this.buildingTile != null;
 	}
 
 	public BuildingTile getBuildingTile() {
