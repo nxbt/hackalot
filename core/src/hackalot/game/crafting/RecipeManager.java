@@ -3,6 +3,7 @@ package hackalot.game.crafting;
 import java.util.ArrayList;
 import java.util.List;
 
+import hackalot.game.item.Item;
 import hackalot.game.map.Blueprint;
 import hackalot.game.map.Map;
 

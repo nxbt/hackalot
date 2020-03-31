@@ -1,6 +1,7 @@
 package hackalot.game.map;
 
 import hackalot.game.crafting.Recipe;
+import hackalot.game.item.Item;
 
 // blueprint for a building, shows as light blue outline on screen
 public class Blueprint {

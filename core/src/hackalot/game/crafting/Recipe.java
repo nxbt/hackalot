@@ -1,5 +1,6 @@
 package hackalot.game.crafting;
 
+import hackalot.game.item.Item;
 import hackalot.game.map.Blueprint;
 import hackalot.game.map.Map;
 
@@ -30,7 +31,7 @@ public class Recipe {
 		return null;
 	}
 	
-	public Blueprint canBuild(Item item) {
+	public boolean canBuild(Item item) {
 		return this.item.equals(item);
 	}
 }
