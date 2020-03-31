@@ -10,7 +10,7 @@ import hackalot.game.map.Tile;
  * @author HANHAN
  *
  */
-public class Character extends Entity {
+public abstract class Character extends Entity {
 	
 	private String name;
 	private int HP; 
@@ -47,8 +47,9 @@ public class Character extends Entity {
 		
 		return null; 
 	}
-//	
-//	
+
+	
+	
 	public void setItem(Item item) {
 		this.item = item;
 	}
