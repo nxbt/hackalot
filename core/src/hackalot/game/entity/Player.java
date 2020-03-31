@@ -20,50 +20,6 @@ public class Player extends Character {
 		super(position, velocity, name, HP);
 	}
 	
-	/**
-	 * pickup item from tile infront of player 
-	 * returns true if pick up successful
-	 * returns false if pick up unsuccessful
-	 * @param item
-	 */
-	private boolean pickUp(Tile tile) {
-		if (!tile.hasItem()) {
-			setItem(tile.getItem());
-			tile.setItem(null);
-			
-			return true;
-		}
-		
-		return false; //cannot pick up; tile empty;
-	}
-
-	private boolean recieveItem(Item item){
-		if(getItem() == null){
-			setItem(item);
-			return true;
-		}
-		return false;
-	}
-	
-	
-	/**
-	 * Drop item in hand onto ahead tile
-	 * True if dropped, false if failed
-	 * @return
-	 */
-	private boolean drop() {
-		Item itemInHand = getItem();
-		Tile tileAhead = getTileAhead();
-		
-		if (!tileAhead.hasItem()) {
-			setItem(null);
-			tileAhead.setItem(itemInHand);
-			return true;
-		}
-		return false;
-		
-	}
-
 	private void interact() {
 		
 	}
