@@ -17,11 +17,8 @@ public class Action {
 
     public boolean canAct(String[] compatibleTiles, Tile tile){
         for(int i = 0; i < compatibleTiles.length; i++){
-            if(compatibleTiles[i] == tile.getName()){
+            if(compatibleTiles[i].equals(tile.getName())) {
                 return true;
-            }
-            else{
-                return false;
             }
         }
         return false;
