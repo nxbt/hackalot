@@ -40,4 +40,7 @@ public abstract class Entity {
 		velocity.add(acceleration).limit(1); 
 	}
 	
+	public Vector2 getVelocity() {
+		return velocity;
+	}
 }

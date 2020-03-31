@@ -3,6 +3,7 @@ package hackalot.game.entity;
 import com.badlogic.gdx.math.Vector2;
 
 import hackalot.game.item.Item;
+import hackalot.game.map.Map;
 import hackalot.game.map.Tile;
 
 /**
@@ -70,7 +71,7 @@ public abstract class Character extends Entity {
 	 */
 	private boolean drop() {
 		Item itemInHand = getItem();
-		Tile tileAhead = getTileAhead();
+		Tile tileAhead = getTileAhead(null); //TODO: CHANGE THIS NULL TO MAP REFERENCE
 		
 		if (!tileAhead.hasItem()) {
 			setItem(null);
@@ -92,11 +93,17 @@ public abstract class Character extends Entity {
 	
 	/**
 	 * Returns the tile 1 tile in the direction of the velocity.
-	 * @return Tile 
+	 * @param map
+	 * @return
 	 */
-	public Tile getTileAhead() {
+	public Tile getTileAhead(Map map) {
 		
-		return null; 
+		
+	
+//		Vector2 aheadPos = getPosition().add(getVelocity().setLength(1)); //adds the velocity as a length of 1 current position
+//		return map.getTile(Math.ceil(aheadPos.x), Math.ceil(aheadPos.y)); //gets tile at new position with x,y rounded up to account for diag
+		
+		return null;
 	}
 
 	
