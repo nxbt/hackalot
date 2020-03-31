@@ -29,6 +29,10 @@ public class Tile {
 	public void setItem(Item item){
 		this.item = item;
 	}
+	
+	public Item getItem(){
+		return item;
+	}
 
 	public String getName(){
 		return this.name;
