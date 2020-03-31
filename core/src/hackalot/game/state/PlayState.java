@@ -32,7 +32,7 @@ public class PlayState extends State {
 		stage.act();
 		
 		if (tickCount % 60 == 0) {
-			Item wood = new Resource("wood.png", "wood", 1, null, null);
+			Item wood = new Resource("wood.png", "wood", 1);
 			if (tickCount / 60 == 1) { 
 				map.getTile(3, 3).setItem(wood);
 				map.updateTile(3, 3);

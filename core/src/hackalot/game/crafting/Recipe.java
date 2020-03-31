@@ -10,6 +10,8 @@ import hackalot.game.map.Map;
 
 public class Recipe {
 	
+	//TODO: allow rotation and flipping of recipes
+	
 	private Item item;
 	
 	private int[] xOffsets;

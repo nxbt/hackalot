@@ -51,7 +51,7 @@ public class RecipeBuilder {
 	}
 	
 	public static Recipe getBarnRecipe() {
-		Item wood = new Resource("wood.png", "wood", 1, null, null);
+		Item wood = new Resource("wood.png", "wood", 1);
 		RecipeBuilder builder = new RecipeBuilder(wood);
 		
 		TileMatcher woodMatcher = new TileMatcher(null, wood, null);
@@ -69,7 +69,6 @@ public class RecipeBuilder {
 		builder.addInfo(2, 1, woodMatcher, barnUpdater);
 		builder.addInfo(2, 2, woodMatcher, barnUpdater);
 		
-		return builder.getRecipe();
-		
+		return builder.getRecipe();	
 	}
 }
