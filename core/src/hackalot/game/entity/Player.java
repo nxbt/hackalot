@@ -1,8 +1,10 @@
 package hackalot.game.entity;
 
 import com.badlogic.gdx.math.Vector2;
-import hackalot.game.item.Item;
-import hackalot.game.map.Tile;
+import hackalot.game.SpriteActor;
+import hackalot.game.controller.PlayerController;
+
+import static hackalot.game.ref.Ref.R;
 
 /**
  * Will represent the player
@@ -11,13 +13,18 @@ import hackalot.game.map.Tile;
  */
 public class Player extends Character {
 
-	public Player(Vector2 position, Vector2 velocity) {
-		super(position, new Vector2(0,0));
-		// TODO Auto-generated constructor stub
+	public Player( Vector2 position ) {
+		super( position );
+
+		this.controller = new PlayerController();
+
+		setMaxHealth( R.player.max_health );
+		setActor( new SpriteActor( "badlogic.jpg" ) );
 	}
-	
-	public Player(Vector2 position, Vector2 velocity, String name, int HP) {
-		super(position, velocity, name, HP);
+
+	@Override
+	public void tick() {
+
 	}
 	
 	private void interact() {
