@@ -1,5 +1,6 @@
 package hackalot.game.state;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -32,7 +33,7 @@ public class PlayState extends State {
 		stage.act();
 		
 		if (tickCount % 60 == 0) {
-			Item wood = new Resource("wood.png", "wood", 1);
+			Item wood = new Resource(new Sprite(Item.wood), "wood", 1);
 			if (tickCount / 60 == 1) { 
 				map.getTile(3, 3).setItem(wood);
 				map.updateTile(3, 3);

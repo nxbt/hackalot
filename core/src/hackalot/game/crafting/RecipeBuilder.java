@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import hackalot.game.item.Item;
@@ -51,7 +52,7 @@ public class RecipeBuilder {
 	}
 	
 	public static Recipe getBarnRecipe() {
-		Item wood = new Resource("wood.png", "wood", 1);
+		Item wood = new Resource(new Sprite(Item.wood), "wood", 1);
 		RecipeBuilder builder = new RecipeBuilder(wood);
 		
 		TileMatcher woodMatcher = new TileMatcher(null, wood, null);

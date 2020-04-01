@@ -1,14 +1,14 @@
 package hackalot.game.item;
 
-import hackalot.game.map.Tile;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Resource extends Item{
 
     private String resourceName;
     private int reasourceSize;
 
-    public Resource(String imageFilePath, String resourceName, int resourceSize){
-        super(imageFilePath);
+    public Resource(Sprite sprite, String resourceName, int resourceSize){
+        super(sprite);
         this.resourceName = resourceName;
         this.reasourceSize = resourceSize;
     }

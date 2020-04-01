@@ -1,7 +1,5 @@
 package hackalot.game.ref;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import hackalot.game.state.StateController;
 
 public class Ref {
@@ -17,6 +15,7 @@ public class Ref {
 		key = new Key();
 
 		sc = new StateController();
+		
 	}
 
 
