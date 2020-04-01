@@ -1,11 +1,11 @@
 package hackalot.game.item;
 
-import hackalot.game.map.Tile;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public abstract class Item {
-    private String imageFilePath;
+    private Sprite imageFilePath;
 
-    public Item(String imageFilePath){
+    public Item(Sprite imageFilePath){
         this.imageFilePath = imageFilePath;
     }
 

@@ -1,15 +1,15 @@
 package hackalot.game.item;
 
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import hackalot.game.map.Tile;
 
 public class Tool extends Item{
 
     private String toolName;
     private String[] compatibleTiles;
-    private Action action;
 
-    public Tool(String imageFilePath, String toolName, String[] compatibleTiles){
+    public Tool(Sprite imageFilePath, String toolName, String[] compatibleTiles){
         super(imageFilePath);
         this.toolName = toolName;
         this.compatibleTiles = compatibleTiles;
@@ -20,14 +20,14 @@ public class Tool extends Item{
     }
 
     public void interact(Tile tile){
-        if(this.toolName == "axe"){
-            action.doChop(this.compatibleTiles, tile);
+        if(this.toolName.equals("axe")){
+            Action.doChop(this.compatibleTiles, tile);
         }
-        else if(this.toolName == "shovel"){
-            action.doDig(this.compatibleTiles, tile);
+        else if(this.toolName.equals("shovel")){
+            Action.doDig(this.compatibleTiles, tile);
         }
-        else if(this.toolName == "pickaxe"){
-            action.doMine(this.compatibleTiles, tile);
+        else if(this.toolName.equals("pickaxe")){
+            Action.doMine(this.compatibleTiles, tile);
         }
     }
 }
