@@ -1,6 +1,8 @@
 package hackalot.game.state;
 
-public abstract class State {
+import com.badlogic.gdx.utils.Disposable;
+
+public abstract class State implements Disposable {
 
 	public abstract void tick();
 	public abstract void draw();

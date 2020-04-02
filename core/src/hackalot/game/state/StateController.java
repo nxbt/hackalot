@@ -1,10 +1,9 @@
 package hackalot.game.state;
 
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Disposable;
 
-import static hackalot.game.ref.Ref.R;
 
-public class StateController {
+public class StateController implements Disposable {
 
 	private State state;
 
@@ -13,7 +12,7 @@ public class StateController {
 	}
 
 	public void changeState( State newState ) {
-		R.stage.clear();
+		state.dispose();
 		this.state = newState;
 	}
 
