@@ -9,8 +9,8 @@ public class Tool extends Item{
     private String toolName;
     private String[] compatibleTiles;
 
-    public Tool(Sprite imageFilePath, String toolName, String[] compatibleTiles){
-        super(imageFilePath);
+    public Tool(Sprite sprite, String toolName, String[] compatibleTiles){
+        super(sprite);
         this.toolName = toolName;
         this.compatibleTiles = compatibleTiles;
     }

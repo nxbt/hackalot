@@ -2,51 +2,93 @@ package hackalot.game.map;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 
 import hackalot.game.SpriteActor;
 import hackalot.game.item.Item;
+import hackalot.game.item.Resource;
 
 public class Tile {
 	
 	private String name;
-	private Actor actor;
+
+	private Group actor;
+	
+	private Actor tileActor;
+	private Actor itemActor;
+	private Actor buildingTileActor;
 	
 	private Item item;
-	private Building building;
+	
+	private BuildingTile buildingTile;
 	
 	public Tile(Sprite sprite, int x, int y) {
-		actor = new SpriteActor(sprite);
+		actor = new Group();
+		
+		tileActor = new SpriteActor(sprite);
+		tileActor.setZIndex(1);
+		tileActor.setWidth(32);
+		tileActor.setHeight(32);
+		
+		actor.addActor(tileActor);
 		actor.setPosition(32*x, 32*y); // in future, 32 should be Resources.TILE_SIZE
-		actor.setWidth(32);
-		actor.setHeight(32);
+	}
+	
+	public Actor getActor() {
+		return actor;
 	}
 	
 	public boolean hasItem() {
 		//return this.item != null;
 		return false; // delete later
 	}
-
-	public void setItem(Item item){
-		this.item = item;
-	}
 	
-	public Item getItem(){
+	public Item getItem() {
 		return item;
 	}
 
-	public String getName(){
-		return this.name;
+	public void setItem(Item item) {
+		System.out.println("Set item to " + (item == null ? "Null" : ((Resource) item).getName()));
+		if(this.item != null) actor.removeActor(this.itemActor);
+		this.item = item;
+		if(this.item != null) {
+			itemActor = this.item.getActor();
+			itemActor.setWidth(32);
+			itemActor.setHeight(32);
+			itemActor.setZIndex(0);
+			
+			actor.addActor(itemActor);
+		}
 	}
 	
-	public boolean hasBuilding() {
-		return this.building != null;
+	public boolean hasBuildingTile() {
+		return this.buildingTile != null;
 	}
-	
-	public Building getBuilding() {
-		return building;
+
+	public BuildingTile getBuildingTile() {
+		return buildingTile;
 	}
-	
-	public Actor getActor() {
-		return actor;
+
+	public void setBuildingTile(BuildingTile buildingTile) {
+		System.out.println("Setting builing to wall.");
+		if(this.buildingTile != null) actor.removeActor(this.buildingTileActor);
+		this.buildingTile = buildingTile;
+		if(this.buildingTile != null) {
+			buildingTileActor = this.buildingTile.getActor();
+			buildingTileActor.setWidth(32);
+			buildingTileActor.setHeight(32);
+			buildingTileActor.setZIndex(0);
+			
+			actor.addActor(buildingTileActor);
+		}
+		this.buildingTile = buildingTile;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }
