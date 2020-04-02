@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.Disposable;
  */
 public abstract class State implements Updatable, Drawable, Disposable, StateUpdateSender {
 
-	private StateUpdateReceiver receiver;
+	private StateUpdateReceiver stateUpdateReceiver;
 
 	/**
 	 * called when the window is resized
@@ -24,7 +24,7 @@ public abstract class State implements Updatable, Drawable, Disposable, StateUpd
 	 */
 	@Override
 	public void setReceiver( StateUpdateReceiver receiver ) {
-		this.receiver = receiver;
+		this.stateUpdateReceiver = receiver;
 	}
 
 	/**
@@ -33,6 +33,6 @@ public abstract class State implements Updatable, Drawable, Disposable, StateUpd
 	 */
 	@Override
 	public StateUpdateReceiver getStateUpdateReceiver() {
-		return this.receiver;
+		return this.stateUpdateReceiver;
 	}
 }
