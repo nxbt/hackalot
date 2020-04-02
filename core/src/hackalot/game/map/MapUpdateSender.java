@@ -10,7 +10,7 @@ public interface MapUpdateSender {
 	 * Sets the MapUpdateReceiver that should receive updates from this MapUpdateSender.
 	 * @param receiver The new receiver.
 	 */
-	abstract public void setReciever(MapUpdateReceiver receiver);
+	abstract public void setReceiver(MapUpdateReceiver receiver);
 	
 	/**
 	 * Gets the MapUpdateReceiver that is Receiving updates from this MapUpdateSender.

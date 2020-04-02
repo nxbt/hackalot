@@ -30,6 +30,8 @@ public class Map implements MapUpdateReceiver, MapInfoProvider {
 	public Map(int width, int height)  {
 		
 		manager = new RecipeManager();
+		manager.setProvider(this);
+		manager.setReceiver(this);
 		manager.addRecipe(RecipeBuilder.getBarnRecipe());
 		
 		actor = new Group();

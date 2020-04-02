@@ -5,6 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import hackalot.game.crafting.Blueprint;
+import hackalot.game.crafting.RecipeBuilder;
+import hackalot.game.crafting.RecipeManager;
 import hackalot.game.item.Item;
 import hackalot.game.item.Resource;
 import com.badlogic.gdx.Screen;
@@ -27,6 +29,7 @@ public class PlayState extends State {
 	private List<Entity> entities;
 
 	public PlayState() {
+		
 		R.stage.setViewport( new ScreenViewport() );
 
 		map = new Map(100, 100 );
@@ -73,7 +76,7 @@ public class PlayState extends State {
 			}
 			if (tickCount / 60 == 10) {
 				Blueprint blueprint = map.getBuildableBlueprint(3, 3, wood);
-				blueprint.build(map);
+				blueprint.build();
 			}
 		}
 		
