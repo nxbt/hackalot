@@ -23,4 +23,6 @@ public class Resource extends Item{
 		return this.resourceName;
 	}
 
+
+
 }

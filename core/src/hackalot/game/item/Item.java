@@ -1,13 +1,15 @@
 package hackalot.game.item;
 
-import com.badlogic.gdx.graphics.Texture;
+
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-
 import hackalot.game.SpriteActor;
 
+
 public abstract class Item {
+    private Sprite sprite;
 
 	private static final Texture itemTextures = new Texture("items.png");
 	public static final TextureRegion wood = new TextureRegion(itemTextures, 0, 0, 32, 32);
@@ -17,11 +19,8 @@ public abstract class Item {
 	public static final TextureRegion wool = new TextureRegion(itemTextures, 128, 0, 32, 32);
 	public static final TextureRegion string = new TextureRegion(itemTextures, 160, 0, 32, 32);
 	public static final TextureRegion sticks = new TextureRegion(itemTextures, 192, 0, 32, 32);
-	
-	private Sprite sprite;
-
     public Item(Sprite sprite){
-    	this.sprite = sprite;
+        this.sprite = sprite;
     }
 
 	public Actor getActor() {
