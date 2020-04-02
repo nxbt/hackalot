@@ -1,19 +1,13 @@
 package hackalot.game.state;
 
 import hackalot.game.Drawable;
-import hackalot.game.Drawer;
 import hackalot.game.Updatable;
-import hackalot.game.Updater;
+import com.badlogic.gdx.utils.Disposable;
 
 /**
  * Abstract class for a game state, such as the main menu or game-play
  */
-public abstract class State implements Updatable, Drawable {
-
-	/**
-	 * Called when this state is no longer needed and resources need to be released
-	 */
-	public abstract void dispose();
+public abstract class State implements Updatable, Drawable, Disposable {
 
 	/**
 	 * called when the window is resized
