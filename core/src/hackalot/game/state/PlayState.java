@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import hackalot.game.crafting.Blueprint;
+import hackalot.game.crafting.RecipeBuilder;
+import hackalot.game.crafting.RecipeManager;
 import hackalot.game.item.Item;
 import hackalot.game.item.Resource;
 import com.badlogic.gdx.math.Vector2;
@@ -26,11 +28,9 @@ public class PlayState extends State {
 	
 	
 	public PlayState() {
-		
 		//our state manager instantiation
 		stageManager = new StageManager();
 		stageManager.setViewport(new ScreenViewport());
-		
 
 		map = new Map(100, 100 );
 		entities = new ArrayList<Entity>();
@@ -55,46 +55,37 @@ public class PlayState extends State {
 		if (tickCount % 60 == 0) {
 			Item wood = new Resource(new Sprite(Item.wood), "wood", 1);
 			if (tickCount / 60 == 1) { 
-				map.getTile(3, 3).setItem(wood);
-				map.updateTile(3, 3);
+				map.setItem(3, 3, wood);
 			}
 			if (tickCount / 60 == 2) {
-				map.getTile(3, 4).setItem(wood);
-				map.updateTile(3, 4);
+				map.setItem(3, 4, wood);
 			}
 			if (tickCount / 60 == 3) {
-				map.getTile(3, 5).setItem(wood);
-				map.updateTile(3, 5);
+				map.setItem(3, 5, wood);
 			}
 
 			if (tickCount / 60 == 4) {
-				map.getTile(4, 3).setItem(wood);
-				map.updateTile(4, 3);
+				map.setItem(4, 3, wood);
 			}
 			if (tickCount / 60 == 5) {
-				map.getTile(4, 4).setItem(wood);
-				map.updateTile(4, 4);
+				map.setItem(4, 4, wood);
 			}
 			if (tickCount / 60 == 6) {
-				map.getTile(4, 5).setItem(wood);
-				map.updateTile(4, 5);
+				map.setItem(4, 5, wood);
 			}
 
 			if (tickCount / 60 == 7) {
-				map.getTile(5, 3).setItem(wood);
-				map.updateTile(5, 3);
+				map.setItem(5, 3, wood);
 			}
 			if (tickCount / 60 == 8) {
-				map.getTile(5, 4).setItem(wood);
-				map.updateTile(5, 4);
+				map.setItem(5, 4, wood);
 			}
 			if (tickCount / 60 == 9) {
-				map.getTile(5, 5).setItem(wood);
-				map.updateTile(5, 5);
+				map.setItem(5, 5, wood);
 			}
 			if (tickCount / 60 == 10) {
 				Blueprint blueprint = map.getBuildableBlueprint(3, 3, wood);
-				blueprint.build(map);
+				blueprint.build();
 			}
 		}
 		
