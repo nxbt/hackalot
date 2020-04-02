@@ -12,7 +12,6 @@ public class Ref {
 	public final Player player;
 
 	public StateController sc;
-	public Stage stage;
 
 	public Ref() {
 		state = new State();

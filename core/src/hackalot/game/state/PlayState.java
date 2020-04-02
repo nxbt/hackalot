@@ -1,7 +1,6 @@
 package hackalot.game.state;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import hackalot.game.crafting.Blueprint;
@@ -9,37 +8,47 @@ import hackalot.game.crafting.RecipeBuilder;
 import hackalot.game.crafting.RecipeManager;
 import hackalot.game.item.Item;
 import hackalot.game.item.Resource;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import hackalot.game.entity.Entity;
 import hackalot.game.entity.Player;
 import hackalot.game.map.Map;
+import hackalot.game.stage.StageManager;
+import hackalot.game.stage.StageUpdateReceiver;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static hackalot.game.ref.Ref.R;
 
 public class PlayState extends State {
 
 	private Map map;
 	private int tickCount;
 	private List<Entity> entities;
-
+	private StageUpdateReceiver stageManager;
+	
+	
 	public PlayState() {
-		
-		R.stage.setViewport( new ScreenViewport() );
+		//our state manager instantiation
+		stageManager = new StageManager();
+		stageManager.setViewport(new ScreenViewport());
 
 		map = new Map(100, 100 );
 		entities = new ArrayList<Entity>();
 
 		tickCount = 0;
-		R.stage.addActor( map.getActor() );
+		stageManager.addActor( map.getActor() );
 		entities.add( new Player( new Vector2( 3, 3 ) ) );
 	}
 
+	public PlayState(StageManager manager) {
+
+		/*
+		 * TODO: If this constructor is necessary,
+		 * add code necessary for custom stage manager
+		 */
+			
+	}
+	
 	@Override
 	public void tick() {
 		
@@ -82,19 +91,24 @@ public class PlayState extends State {
 		
 		tickCount++;
 		
-		R.stage.act();
+		stageManager.act();
 	}
 
 	@Override
 	public void draw() {
-		R.stage.draw();
+		stageManager.draw();
 	}
 
-	@Override
-	public void dispose() {}
+
 
 	@Override
 	public void resize( int width, int height ) {}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 }
