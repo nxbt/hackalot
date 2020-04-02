@@ -3,6 +3,7 @@ package hackalot.game.entity;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import hackalot.game.SpriteActor;
+import hackalot.game.Updatable;
 
 import static hackalot.game.ref.Ref.R;
 
@@ -13,7 +14,7 @@ import static hackalot.game.ref.Ref.R;
  *
  */
 
-public abstract class Entity {
+public abstract class Entity implements Updatable {
 
 	private Vector2 position;
 	private Vector2 velocity; // (1,0) right (0,1) up (-1,0) left (0,-1) bottom
@@ -60,8 +61,6 @@ public abstract class Entity {
 	public Actor getActor() {
 		return this.actor;
 	}
-
-	public abstract void tick();
 	
 	public Vector2 getPosition() {
 		return position;

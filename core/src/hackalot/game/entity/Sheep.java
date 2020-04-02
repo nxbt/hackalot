@@ -20,7 +20,7 @@ public class Sheep extends Animal {
 	}
 
 	@Override
-	public void tick() {
+	public void update() {
 
 	}
 

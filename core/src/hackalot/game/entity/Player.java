@@ -23,7 +23,7 @@ public class Player extends Character {
 	}
 
 	@Override
-	public void tick() {
+	public void update() {
 
 	}
 	
