@@ -110,10 +110,8 @@ public abstract class Character extends Entity {
 		
 		
 	
-//		Vector2 aheadPos = getPosition().add(getVelocity().setLength(1)); //adds the velocity as a length of 1 current position
-//		return map.getTile(Math.ceil(aheadPos.x), Math.ceil(aheadPos.y)); //gets tile at new position with x,y rounded up to account for diag
-		
-		return null;
+		Vector2 aheadPos = getPosition().add(getVelocity().setLength(1)); //adds the velocity as a length of 1 current position
+		return map.getTile((int)Math.ceil(aheadPos.x), (int)Math.ceil(aheadPos.y)); //gets tile at new position with x,y rounded up to account for diag
 	}
 
 	
