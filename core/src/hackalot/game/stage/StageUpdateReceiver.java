@@ -2,6 +2,7 @@ package hackalot.game.stage;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 public interface StageUpdateReceiver {
 	
@@ -23,7 +24,7 @@ public interface StageUpdateReceiver {
 	 * to interact with the stage variable in StageManager.java
 	 * 
 	 */
-	public void setViewport(ScreenViewport view);
+	public void setViewport(Viewport view);
 	public void act();
 	public void draw();
 }

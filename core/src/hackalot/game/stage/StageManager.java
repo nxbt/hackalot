@@ -3,6 +3,7 @@ package hackalot.game.stage;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class StageManager implements StageUpdateReceiver{
 	private Stage stage;
@@ -15,14 +16,6 @@ public class StageManager implements StageUpdateReceiver{
 	}
 	
 	
-	public Stage getStage() {
-		return stage;
-	}
-	
-	public StageManager(Stage stage) {
-		this.stage = stage;
-	}
-	
 	@Override
 	public void addActor(Actor actor) {
 		// TODO Auto-generated method stub
@@ -30,14 +23,22 @@ public class StageManager implements StageUpdateReceiver{
 		
 	}
 
+	/**
+	 * Removes actor from any stage it may be in
+	 * @param Actor
+	 */
 	@Override
 	public void removeActor(Actor actor) {
-		// TODO Auto-generated method stub
+		actor.remove();
 		
 	}
 
+	/**
+	 * Takes in a viewport and sets the stage to it
+	 * @param ScreenViewport
+	 */
 	@Override
-	public void setViewport(ScreenViewport view) {
+	public void setViewport(Viewport view) {
 		stage.setViewport(view);
 	}
 
@@ -54,8 +55,5 @@ public class StageManager implements StageUpdateReceiver{
 		stage.draw();
 		
 	}
-	
-	
-	
-	
+
 }
