@@ -11,7 +11,7 @@ import hackalot.game.crafting.RecipeBuilder;
 import hackalot.game.crafting.RecipeManager;
 import hackalot.game.item.Item;
 
-public class Map {
+public class Map implements MapUpdateReceiver, MapInfoProvider {
 	
 	private static final Texture tileTextures = new Texture("tilemap.png");
 	private static final TextureRegion wood = new TextureRegion(tileTextures, 0, 0, 32, 32);
@@ -45,7 +45,7 @@ public class Map {
 	}
 	
 	// should be called whenever a tile is updated, to update the state of the map.
-	public void updateTile(int x, int y) {
+	private void updateTile(int x, int y) {
 		manager.updateBlueprints(this, x, y);
 		// in future, handle hitbox changes, etc.
 	}
@@ -60,5 +60,24 @@ public class Map {
 	
 	public Blueprint getBuildableBlueprint(int x, int y, Item item) {
 		return manager.getBuildableBlueprint(this, x, y, item);
+	}
+
+	@Override
+	public void setItem(int x, int y, Item item) {
+		tilemap[x][y].setItem(item);
+		updateTile(x, y);
+	}
+
+	@Override
+	public void setName(int x, int y, String name) {
+		tilemap[x][y].setName(name);
+		updateTile(x, y);
+		
+	}
+
+	@Override
+	public void setBuildingTile(int x, int y, BuildingTile buildingTile) {
+		tilemap[x][y].setBuildingTile(buildingTile);
+		updateTile(x, y);
 	}
 }
