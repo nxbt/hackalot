@@ -11,13 +11,16 @@ import hackalot.game.Updatable;
  * @author HANHAN
  *
  */
-
-public abstract class Entity implements Updatable {
+public abstract class Entity implements EntityUpdateSender, EntityInfoQuerier, Updatable {
 
 	private Vector2 position;
 	private Vector2 velocity; // (1,0) right (0,1) up (-1,0) left (0,-1) bottom
 
 	private Actor actor;
+
+	private EntityUpdateReceiver receiver;
+
+	private EntityInfoProvider provider;
 
 	public Entity( Vector2 position ) {
 		this.position = position; 
@@ -74,4 +77,18 @@ public abstract class Entity implements Updatable {
 	public Vector2 getVelocity() {
 		return velocity;
 	}
+
+	/**
+	 * Getters and setters for the receiver
+	 * @return
+	 */
+	public EntityUpdateReceiver getReceiver(){ return this.receiver; }
+	public void setReceiver(EntityUpdateReceiver entity){ this.receiver = entity; }
+
+	/**
+	 * Getters and setters for the InfoProvider
+	 * @return
+	 */
+	public EntityInfoProvider getEntityInfoProvider(){ return this.provider; }
+	public void setProvider(EntityInfoProvider provider){ this.provider = provider; }
 }
