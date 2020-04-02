@@ -2,7 +2,7 @@ package hackalot.game.ref;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-import hackalot.game.state.StateController;
+import hackalot.game.state.StateManager;
 
 public class Ref {
 	public static final Ref R = new Ref();
@@ -11,7 +11,7 @@ public class Ref {
 	public final Key key;
 	public final Player player;
 
-	public StateController sc;
+	public StateManager sc;
 	public Stage stage;
 
 	public Ref() {

@@ -20,12 +20,19 @@ import java.util.List;
 
 import static hackalot.game.ref.Ref.R;
 
+/**
+ * State for game-play sections
+ * @author Brendan
+ */
 public class PlayState extends State {
 
 	private Map map;
 	private int tickCount;
 	private List<Entity> entities;
 
+	/**
+	 * Default constructor
+	 */
 	public PlayState() {
 		R.stage.setViewport( new ScreenViewport() );
 
@@ -37,8 +44,11 @@ public class PlayState extends State {
 		entities.add( new Player( new Vector2( 3, 3 ) ) );
 	}
 
+	/**
+	 * Updates all game-play elements
+	 */
 	@Override
-	public void tick() {
+	public void update() {
 		
 		if (tickCount % 60 == 0) {
 			Item wood = new Resource(new Sprite(Item.wood), "wood", 1);
@@ -91,14 +101,25 @@ public class PlayState extends State {
 		R.stage.act();
 	}
 
+	/**
+	 * Draws all game-play elements
+	 */
 	@Override
 	public void draw() {
 		R.stage.draw();
 	}
 
+	/**
+	 * Releases resources when the play state is destroyed
+	 */
 	@Override
 	public void dispose() {}
 
+	/**
+	 * Called when the window is resized
+	 * @param width The new window width
+	 * @param height The new window height
+	 */
 	@Override
 	public void resize( int width, int height ) {}
 
