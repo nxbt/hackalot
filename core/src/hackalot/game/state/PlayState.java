@@ -18,17 +18,22 @@ import hackalot.game.stage.StageUpdateReceiver;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * State for game-play sections
+ * @author Brendan
+ */
 public class PlayState extends State {
 
 	private Map map;
 	private int tickCount;
 	private List<Entity> entities;
 	private StageUpdateReceiver stageManager;
-	
-	
+
+	/**
+	 * Default constructor
+	 */
 	public PlayState() {
-		//our state manager instantiation
+		//our stage manager instantiation
 		stageManager = new StageManager();
 		stageManager.setViewport(new ScreenViewport());
 
@@ -40,17 +45,11 @@ public class PlayState extends State {
 		entities.add( new Player( new Vector2( 3, 3 ) ) );
 	}
 
-	public PlayState(StageManager manager) {
-
-		/*
-		 * TODO: If this constructor is necessary,
-		 * add code necessary for custom stage manager
-		 */
-			
-	}
-	
+	/**
+	 * Updates all game-play elements
+	 */
 	@Override
-	public void tick() {
+	public void update() {
 		
 		if (tickCount % 60 == 0) {
 			Item wood = new Resource(new Sprite(Item.wood), "wood", 1);
@@ -94,21 +93,30 @@ public class PlayState extends State {
 		stageManager.act();
 	}
 
+	/**
+	 * Draws all game-play elements
+	 */
 	@Override
 	public void draw() {
 		stageManager.draw();
 	}
 
-
-
-	@Override
-	public void resize( int width, int height ) {}
-
+	/**
+	 * Releases resources when the play state is destroyed
+	 */
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		//TODO: stageManager.dispose();
 	}
 
+	/**
+	 * Called when the window is resized
+	 * @param width The new window width
+	 * @param height The new window height
+	 */
+	@Override
+	public void resize( int width, int height ) {
+		//TODO: stageManager.resize( width, height );
+	}
 
 }

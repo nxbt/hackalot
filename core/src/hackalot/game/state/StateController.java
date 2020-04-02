@@ -16,8 +16,8 @@ public class StateController implements Disposable {
 		this.state = newState;
 	}
 
-	public void tick() {
-		state.tick();
+	public void update() {
+		state.update();
 	}
 
 	public void draw() {

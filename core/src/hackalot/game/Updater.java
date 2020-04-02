@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 /**
  * Interface for objects that hold collections of updatable objects
- *
+ * @param <U> The type of updatable this object updates
  * @author Brendan
  */
 public interface Updater<U extends Updatable> {
