@@ -25,7 +25,7 @@ public class StageManager implements StageUpdateReceiver{
 
 	/**
 	 * Removes actor from any stage it may be in
-	 * @param Actor
+	 * @param actor the actor to be removed
 	 */
 	@Override
 	public void removeActor(Actor actor) {
@@ -35,7 +35,7 @@ public class StageManager implements StageUpdateReceiver{
 
 	/**
 	 * Takes in a viewport and sets the stage to it
-	 * @param ScreenViewport
+	 * @param view the viewport to change to
 	 */
 	@Override
 	public void setViewport(Viewport view) {
