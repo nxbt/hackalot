@@ -59,7 +59,8 @@ public class Map implements MapUpdateReceiver, MapInfoProvider {
 	public Actor getActor() {
 		return actor;
 	}
-	
+
+	@Override
 	public Blueprint getBuildableBlueprint(int x, int y, Item item) {
 		return manager.getBuildableBlueprint(this, x, y, item);
 	}

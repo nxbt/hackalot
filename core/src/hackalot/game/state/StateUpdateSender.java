@@ -7,13 +7,13 @@ package hackalot.game.state;
 public interface StateUpdateSender {
 	/**
 	 * Sets the StateUpdateReceiver
-	 * @param stateUpdateReceiver The new StateUpdateReceiver
+	 * @param receiver The new StateUpdateReceiver
 	 */
-	void setReceiver( StateUpdateReceiver stateUpdateReceiver );
+	void setReceiver( StateUpdateReceiver receiver );
 
 	/**
 	 * Gets a reference to the StateUpdateReceiver
 	 * @return The StateUpdateReceiver tied to this
 	 */
-	StateUpdateReceiver getReceiver();
+	StateUpdateReceiver getStateUpdateReceiver();
 }

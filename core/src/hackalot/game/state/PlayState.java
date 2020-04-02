@@ -3,46 +3,66 @@ package hackalot.game.state;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+import hackalot.game.Drawable;
+import hackalot.game.Drawer;
+import hackalot.game.Updatable;
+import hackalot.game.Updater;
 import hackalot.game.crafting.Blueprint;
-import hackalot.game.crafting.RecipeBuilder;
-import hackalot.game.crafting.RecipeManager;
+import hackalot.game.entity.EntityManager;
 import hackalot.game.item.Item;
 import hackalot.game.item.Resource;
-import com.badlogic.gdx.math.Vector2;
-import hackalot.game.entity.Entity;
-import hackalot.game.entity.Player;
-import hackalot.game.map.Map;
+import hackalot.game.map.*;
 import hackalot.game.stage.StageManager;
 import hackalot.game.stage.StageUpdateReceiver;
+import hackalot.game.stage.StageUpdateSender;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * State for game-play sections
  * @author Brendan
  */
-public class PlayState extends State {
+public class PlayState extends State implements Updater<Updatable>, Drawer<Drawable>, MapUpdateSender, StageUpdateSender {
 
-	private Map map;
 	private int tickCount;
-	private List<Entity> entities;
-	private StageUpdateReceiver stageManager;
+
+	private List<Updatable> updatables;
+	private List<Drawable> drawables;
+
+	private MapUpdateReceiver mapUpdateReceiver;
+	private StageUpdateReceiver stageUpdateReceiver;
 
 	/**
 	 * Default constructor
 	 */
 	public PlayState() {
-		//our stage manager instantiation
-		stageManager = new StageManager();
-		stageManager.setViewport(new ScreenViewport());
+		updatables = new ArrayList<>();
+		drawables = new ArrayList<>();
 
-		map = new Map(100, 100 );
-		entities = new ArrayList<Entity>();
+		// stage manager initialization
+		StageManager stageManager = new StageManager();
+		stageManager.setViewport( new ScreenViewport() );
 
-		tickCount = 0;
-		stageManager.addActor( map.getActor() );
-		entities.add( new Player( new Vector2( 3, 3 ) ) );
+		// entity manager initialization
+		EntityManager entityManager = new EntityManager();
+
+		// map initialization
+		Map map = new Map(100, 100 );
+
+		// add all updatables
+		addUpdatable( entityManager );
+
+		// add all drawables
+		addDrawable( stageManager );
+
+		// set the appropriate update receivers
+		setReceiver( map );
+		setReceiver( stageManager );
+
+		getStageUpdateReceiver().addActor( map.getActor() );
+//		entities.add( new Player( new Vector2( 3, 3 ) ) );
 	}
 
 	/**
@@ -50,55 +70,61 @@ public class PlayState extends State {
 	 */
 	@Override
 	public void update() {
-		
+
+		MapUpdateReceiver mapReceiver = getMapUpdateReceiver();
+
 		if (tickCount % 60 == 0) {
 			Item wood = new Resource(new Sprite(Item.wood), "wood", 1);
 			if (tickCount / 60 == 1) { 
-				map.setItem(3, 3, wood);
+				mapReceiver.setItem(3, 3, wood);
 			}
 			if (tickCount / 60 == 2) {
-				map.setItem(3, 4, wood);
+				mapReceiver.setItem(3, 4, wood);
 			}
 			if (tickCount / 60 == 3) {
-				map.setItem(3, 5, wood);
+				mapReceiver.setItem(3, 5, wood);
 			}
 
 			if (tickCount / 60 == 4) {
-				map.setItem(4, 3, wood);
+				mapReceiver.setItem(4, 3, wood);
 			}
 			if (tickCount / 60 == 5) {
-				map.setItem(4, 4, wood);
+				mapReceiver.setItem(4, 4, wood);
 			}
 			if (tickCount / 60 == 6) {
-				map.setItem(4, 5, wood);
+				mapReceiver.setItem(4, 5, wood);
 			}
 
 			if (tickCount / 60 == 7) {
-				map.setItem(5, 3, wood);
+				mapReceiver.setItem(5, 3, wood);
 			}
 			if (tickCount / 60 == 8) {
-				map.setItem(5, 4, wood);
+				mapReceiver.setItem(5, 4, wood);
 			}
 			if (tickCount / 60 == 9) {
-				map.setItem(5, 5, wood);
+				mapReceiver.setItem(5, 5, wood);
 			}
 			if (tickCount / 60 == 10) {
-				Blueprint blueprint = map.getBuildableBlueprint(3, 3, wood);
+				Blueprint blueprint = mapReceiver.getBuildableBlueprint(3, 3, wood);
 				blueprint.build();
 			}
 		}
 		
 		tickCount++;
 		
-		stageManager.act();
+		getStageUpdateReceiver().act();
 	}
 
 	/**
-	 * Draws all game-play elements
+	 * Draws all drawables to the screen
 	 */
 	@Override
 	public void draw() {
-		stageManager.draw();
+		Iterator<Drawable> itr = getDrawables();
+
+		while( itr.hasNext() ) {
+			itr.next().draw();
+		}
 	}
 
 	/**
@@ -106,7 +132,7 @@ public class PlayState extends State {
 	 */
 	@Override
 	public void dispose() {
-		//TODO: stageManager.dispose();
+		getStageUpdateReceiver().dispose();
 	}
 
 	/**
@@ -116,7 +142,98 @@ public class PlayState extends State {
 	 */
 	@Override
 	public void resize( int width, int height ) {
-		//TODO: stageManager.resize( width, height );
+		getStageUpdateReceiver().resize( width, height );
 	}
 
+	/**
+	 * Adds an updatable to the list of updatables this will update
+	 * @param updatable The updatable object to add
+	 */
+	@Override
+	public void addUpdatable( Updatable updatable ) {
+		updatables.add( updatable );
+	}
+
+	/**
+	 * Removes an updatable from the list of updatables this will update
+	 * @param updatable The updatable object to remove
+	 * @return True if the updatable was successfully removed
+	 */
+	@Override
+	public boolean removeUpdatable( Updatable updatable ) {
+		return updatables.remove( updatable );
+	}
+
+	/**
+	 * Gets an iterator over the updatables this updates
+	 * @return An iterator over updatables to update
+	 */
+	@Override
+	public Iterator<Updatable> getUpdatables() {
+		return updatables.iterator();
+	}
+
+	/**
+	 * Adds a drawable to the list of drawables this will draw
+	 * @param drawable The drawable object to add
+	 */
+	@Override
+	public void addDrawable( Drawable drawable ) {
+		drawables.add( drawable );
+	}
+
+	/**
+	 * Removes a drawable from the list of drawables this will draw
+	 * @param drawable The drawable object to remove
+	 * @return True if the drawable was successfully removed
+	 */
+	@Override
+	public boolean removeDrawable( Drawable drawable ) {
+		return drawables.remove( drawable );
+	}
+
+	/**
+	 * Gets an iterator over the list of drawables this will draw
+	 * @return An iterator over drawables to draw
+	 */
+	@Override
+	public Iterator<Drawable> getDrawables() {
+		return drawables.iterator();
+	}
+
+	/**
+	 * Sets the StageUpdateReceiver
+	 * @param receiver The StageUpdateReceiver to use
+	 */
+	@Override
+	public void setReceiver( StageUpdateReceiver receiver ) {
+		this.stageUpdateReceiver = receiver;
+	}
+
+	/**
+	 * Gets the StageUpdateReceiver
+	 * @return The StageUpdateReceiver
+	 */
+	@Override
+	public StageUpdateReceiver getStageUpdateReceiver() {
+		return this.stageUpdateReceiver;
+	}
+
+	/**
+	 * Sets the MapUpdateReceiver
+	 * @param receiver The MapUpdateReceiver to use
+	 */
+	@Override
+	public void setReceiver( MapUpdateReceiver receiver ) {
+		this.mapUpdateReceiver = receiver;
+	}
+
+	/**
+	 * Gets the MapUpdateReceiver
+	 * @return The MapUpdateReceiver
+	 */
+	@Override
+	public MapUpdateReceiver getMapUpdateReceiver() {
+		return this.mapUpdateReceiver;
+	}
 }
