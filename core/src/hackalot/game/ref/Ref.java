@@ -1,6 +1,6 @@
 package hackalot.game.ref;
 
-import hackalot.game.state.StateController;
+import hackalot.game.state.StateManager;
 
 public class Ref {
 	public static final Ref R = new Ref();
@@ -9,7 +9,7 @@ public class Ref {
 	public final Key key;
 	public final Player player;
 
-	public StateController sc;
+	public StateManager sc;
 
 	public Ref() {
 		state = new State();

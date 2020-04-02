@@ -1,9 +1,6 @@
 package hackalot.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-
-import hackalot.game.state.StateController;
 import hackalot.game.state.StateManager;
 
 import static hackalot.game.ref.Ref.R;
@@ -13,7 +10,7 @@ public class GameMain extends ApplicationAdapter {
 	
 	@Override
 	public void create () {
-		R.sc = new StateController();
+		R.sc = new StateManager();
 	}
 
 	@Override
