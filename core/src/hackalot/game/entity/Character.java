@@ -2,6 +2,7 @@ package hackalot.game.entity;
 
 import com.badlogic.gdx.math.Vector2;
 
+import hackalot.game.controller.Controller;
 import hackalot.game.item.Item;
 import hackalot.game.map.Map;
 import hackalot.game.map.Tile;
@@ -12,30 +13,39 @@ import hackalot.game.map.Tile;
  *
  */
 public abstract class Character extends Entity {
-	
+
+	protected Controller controller;
+
 	private String name;
-	private int HP; 
+	private int maxHealth;
+	private int health;
 	private Item item;
-//	private Controller controller;
-	
-	
-	//Super Constructor
-	public Character(Vector2 position, Vector2 velocity) {
-		super(position, new Vector2(0,0));
-		// TODO Auto-generated constructor stub
+
+	public Character( Vector2 position ) {
+		super(position);
 	}
 	
-	public Character(Vector2 position, Vector2 velocity, String name, int HP) {
-		super(position, velocity);
+	public Character(Vector2 position, Vector2 velocity, String name, int health) {
+		super( position, velocity );
+
 		this.name = name;
-		this.HP = HP;
+		setMaxHealth( health );
 	}
-	
+
+	public void setMaxHealth( int maxHealth ) {
+		this.maxHealth = maxHealth;
+		this.health = maxHealth;
+	}
+
+	public void setName( String name ) {
+		this.name = name;
+	}
+
 	/**
-	 * pickup item from tile infront of player 
+	 * pickup item from tile in front of player
 	 * returns true if pick up successful
 	 * returns false if pick up unsuccessful
-	 * @param item
+	 * @param tile
 	 */
 	private boolean pickUp(Tile tile) {
 		if (!tile.hasItem()) {

@@ -11,16 +11,19 @@ public class Sheep extends Animal {
 
 	private boolean sheared; //is the sheep sheared?
 	
-	public Sheep(Vector2 position, Vector2 velocity) {
-		super(position, new Vector2(0,0));
-		// TODO Auto-generated constructor stub
+	public Sheep( Vector2 position ) {
+		super( position );
 	}
 
 	public Sheep(Vector2 position, Vector2 velocity, String name, int HP) {
 		super(position, velocity, name, HP);
-		// TODO Auto-generated constructor stub
 	}
-	
+
+	@Override
+	public void tick() {
+
+	}
+
 	public boolean getSheared() {
 		return sheared;
 	}
