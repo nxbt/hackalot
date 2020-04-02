@@ -1,6 +1,6 @@
 package hackalot.game.entity;
 
 public interface EntityUpdateSender {
-    void setReceiver(EntityUpdateReceiver receiver);
-    EntityUpdateReceiver getReceiver();
+    EntityUpdateReceiver getEntityUpdateReceiver();
+    void setReceiver( EntityUpdateReceiver receiver);
 }
