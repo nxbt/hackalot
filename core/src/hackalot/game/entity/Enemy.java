@@ -25,9 +25,9 @@ public abstract class Enemy extends Character {
 	 * Takes in tile infront of enemy and attacks only if tile has building
 	 */
 	private void attack(Tile tileAhead) {
-		if (tileAhead.hasBuilding()) {
-			Building building = tileAhead.getBuilding();
-			building.setHealth(building.getHealth() - damage);
+		if (tileAhead.hasBuildingTile()) {
+			BuildingTile buildingTile = tileAhead.getBuildingTile();
+			buildingTile.setHealth(buildingTile.getHealth() - damage);
 		}
 	}
 }

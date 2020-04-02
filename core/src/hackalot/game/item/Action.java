@@ -1,5 +1,7 @@
 package hackalot.game.item;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
+
 import hackalot.game.map.Tile;
 
 public class Action {
@@ -10,21 +12,21 @@ public class Action {
 
     public void doChop(String[] compatibleTiles, Tile tile){
         if(canAct(compatibleTiles, tile)){
-            Resource wood = new Resource("/image_file_path/wood", "wood", 1);
+            Resource wood = new Resource(new Sprite(Item.wood), "wood", 1);
             tile.setItem(wood);
         }
     }
 
     public void doDig(String[] compatibleTiles, Tile tile){
         if(canAct(compatibleTiles, tile)){
-            Resource mud = new Resource("/image_file_path/mud", "mud", 1);
+            Resource mud = new Resource(new Sprite(Item.clay), "mud", 1);
             tile.setItem(mud);
         }
     }
 
     public void doMine(String[] compatibleTiles, Tile tile){
         if(canAct(compatibleTiles, tile)){
-            Resource stone = new Resource("/image_file_path/stone", "stone", 1);
+            Resource stone = new Resource(new Sprite(Item.bricks), "stone", 1);
             tile.setItem(stone);
         }
     }

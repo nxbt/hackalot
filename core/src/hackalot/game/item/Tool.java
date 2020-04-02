@@ -1,6 +1,8 @@
 package hackalot.game.item;
 
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
+
 import hackalot.game.map.Tile;
 
 public class Tool extends Item{
@@ -9,8 +11,8 @@ public class Tool extends Item{
     private String[] compatibleTiles;
     private Action action;
 
-    public Tool(String imageFilePath, String toolName, String[] compatibleTiles){
-        super(imageFilePath);
+    public Tool(Sprite sprite, String toolName, String[] compatibleTiles){
+        super(sprite);
         this.toolName = toolName;
         this.compatibleTiles = compatibleTiles;
     }

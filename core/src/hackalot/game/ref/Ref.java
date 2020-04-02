@@ -1,8 +1,7 @@
 package hackalot.game.ref;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+
 import hackalot.game.state.StateController;
 
 public class Ref {
