@@ -2,9 +2,8 @@ package hackalot.game.entity;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import hackalot.game.SpriteActor;
+import hackalot.game.Updatable;
 
-import static hackalot.game.ref.Ref.R;
 
 /**
  * Entity class is the part class of Character
@@ -12,8 +11,7 @@ import static hackalot.game.ref.Ref.R;
  * @author HANHAN
  *
  */
-
-public abstract class Entity implements EntityUpdateSender, EntityInfoQuerier {
+public abstract class Entity implements EntityUpdateSender, EntityInfoQuerier, Updatable {
 
 	private Vector2 position;
 	private Vector2 velocity; // (1,0) right (0,1) up (-1,0) left (0,-1) bottom
@@ -34,7 +32,7 @@ public abstract class Entity implements EntityUpdateSender, EntityInfoQuerier {
 		this.velocity = new Vector2();
 
 		this.actor = actor;
-		R.stage.addActor( this.actor );
+//		R.stage.addActor( this.actor );
 	}
 
 	public Entity( Vector2 position, Vector2 velocity ) {
@@ -47,7 +45,7 @@ public abstract class Entity implements EntityUpdateSender, EntityInfoQuerier {
 		this.velocity = velocity;
 
 		this.actor = actor;
-		R.stage.addActor( this.actor );
+//		R.stage.addActor( this.actor );
 	}
 
 	public void setActor( Actor actor ) {
@@ -58,14 +56,12 @@ public abstract class Entity implements EntityUpdateSender, EntityInfoQuerier {
 		this.actor = actor;
 		this.actor.setPosition( position.x, position.y );
 		this.actor.setSize( 48, 48 );
-		R.stage.addActor( this.actor );
+//		R.stage.addActor( this.actor );
 	}
 
 	public Actor getActor() {
 		return this.actor;
 	}
-
-	public abstract void tick();
 	
 	public Vector2 getPosition() {
 		return position;
