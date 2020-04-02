@@ -7,11 +7,11 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
 import hackalot.game.crafting.Blueprint;
-import hackalot.game.crafting.RecipeBuilder;
-import hackalot.game.crafting.RecipeManager;
+import hackalot.game.crafting.RecipeUpdateReceiver;
+import hackalot.game.crafting.RecipeUpdateSender;
 import hackalot.game.item.Item;
 
-public class Map implements MapUpdateReceiver, MapInfoProvider {
+public class Map implements MapUpdateReceiver, MapInfoProvider, RecipeUpdateSender {
 	
 	private static final Texture tileTextures = new Texture("tilemap.png");
 	private static final TextureRegion wood = new TextureRegion(tileTextures, 0, 0, 32, 32);
@@ -25,14 +25,9 @@ public class Map implements MapUpdateReceiver, MapInfoProvider {
 	
 	private Tile[][] tilemap;
 	
-	private RecipeManager manager;
+	private RecipeUpdateReceiver receiver;
 	
 	public Map(int width, int height)  {
-		
-		manager = new RecipeManager();
-		manager.setProvider(this);
-		manager.setReceiver(this);
-		manager.addRecipe(RecipeBuilder.getBarnRecipe());
 		
 		actor = new Group();
 		this.tilemap = new Tile[width][height];
@@ -48,7 +43,7 @@ public class Map implements MapUpdateReceiver, MapInfoProvider {
 	
 	// should be called whenever a tile is updated, to update the state of the map.
 	private void updateTile(int x, int y) {
-		manager.updateBlueprints(this, x, y);
+		getRecipeUpdateReceiver().updateBlueprints(x, y);
 		// in future, handle hitbox changes, etc.
 	}
 	
@@ -58,10 +53,6 @@ public class Map implements MapUpdateReceiver, MapInfoProvider {
 	
 	public Actor getActor() {
 		return actor;
-	}
-	
-	public Blueprint getBuildableBlueprint(int x, int y, Item item) {
-		return manager.getBuildableBlueprint(this, x, y, item);
 	}
 
 	@Override
@@ -81,5 +72,16 @@ public class Map implements MapUpdateReceiver, MapInfoProvider {
 	public void setBuildingTile(int x, int y, BuildingTile buildingTile) {
 		tilemap[x][y].setBuildingTile(buildingTile);
 		updateTile(x, y);
+	}
+
+	@Override
+	public void setReceiver(RecipeUpdateReceiver receiver) {
+		this.receiver = receiver;
+		
+	}
+
+	@Override
+	public RecipeUpdateReceiver getRecipeUpdateReceiver() {
+		return receiver;
 	}
 }

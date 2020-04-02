@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import hackalot.game.crafting.Blueprint;
 import hackalot.game.crafting.RecipeBuilder;
+import hackalot.game.crafting.RecipeInfoProvider;
 import hackalot.game.crafting.RecipeManager;
 import hackalot.game.item.Item;
 import hackalot.game.item.Resource;
@@ -28,6 +29,7 @@ public class PlayState extends State {
 	private int tickCount;
 	private List<Entity> entities;
 	private StageUpdateReceiver stageManager;
+	private RecipeInfoProvider recipeManager;
 
 	/**
 	 * Default constructor
@@ -43,6 +45,15 @@ public class PlayState extends State {
 		tickCount = 0;
 		stageManager.addActor( map.getActor() );
 		entities.add( new Player( new Vector2( 3, 3 ) ) );
+
+		RecipeManager recipeManager = new RecipeManager();
+		recipeManager.setProvider(map);
+		recipeManager.setReceiver(map);
+		recipeManager.addRecipe(RecipeBuilder.getBarnRecipe());
+		
+		this.recipeManager = recipeManager;
+		
+		map.setReceiver(recipeManager);
 	}
 
 	/**
@@ -83,7 +94,7 @@ public class PlayState extends State {
 				map.setItem(5, 5, wood);
 			}
 			if (tickCount / 60 == 10) {
-				Blueprint blueprint = map.getBuildableBlueprint(3, 3, wood);
+				Blueprint blueprint = recipeManager.getBuildableBlueprint(3, 3, wood);
 				blueprint.build();
 			}
 		}
