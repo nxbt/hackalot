@@ -9,6 +9,9 @@ import hackalot.game.Updatable;
 import hackalot.game.Updater;
 import hackalot.game.crafting.Blueprint;
 import hackalot.game.entity.EntityManager;
+import hackalot.game.crafting.RecipeBuilder;
+import hackalot.game.crafting.RecipeInfoProvider;
+import hackalot.game.crafting.RecipeManager;
 import hackalot.game.item.Item;
 import hackalot.game.item.Resource;
 import hackalot.game.map.*;
@@ -33,6 +36,7 @@ public class PlayState extends State implements Updater<Updatable>, Drawer<Drawa
 
 	private MapUpdateReceiver mapUpdateReceiver;
 	private StageUpdateReceiver stageUpdateReceiver;
+	private RecipeInfoProvider recipeManager;
 
 	/**
 	 * Default constructor
@@ -48,6 +52,9 @@ public class PlayState extends State implements Updater<Updatable>, Drawer<Drawa
 		// entity manager initialization
 		EntityManager entityManager = new EntityManager();
 
+    // recipe manager initialization
+    RecipeManager recipeManager = new RecipeManager();
+    
 		// map initialization
 		Map map = new Map(100, 100 );
 
@@ -63,6 +70,16 @@ public class PlayState extends State implements Updater<Updatable>, Drawer<Drawa
 
 		getStageUpdateReceiver().addActor( map.getActor() );
 //		entities.add( new Player( new Vector2( 3, 3 ) ) );
+
+		tickCount = 0;
+
+		recipeManager.setProvider(map);
+		recipeManager.setReceiver(map);
+		recipeManager.addRecipe(RecipeBuilder.getBarnRecipe());
+		
+		this.recipeManager = recipeManager;
+		
+		map.setReceiver(recipeManager);
 	}
 
 	/**
@@ -105,7 +122,7 @@ public class PlayState extends State implements Updater<Updatable>, Drawer<Drawa
 				mapReceiver.setItem(5, 5, wood);
 			}
 			if (tickCount / 60 == 10) {
-				Blueprint blueprint = mapReceiver.getBuildableBlueprint(3, 3, wood);
+				Blueprint blueprint = recipeManager.getBuildableBlueprint(3, 3, wood);
 				blueprint.build();
 			}
 		}
