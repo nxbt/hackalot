@@ -27,7 +27,7 @@ import java.util.List;
  * State for game-play sections
  * @author Brendan
  */
-public class PlayState extends State implements Updater<Updatable>, Drawer<Drawable>, MapUpdateSender, StageUpdateSender {
+public class PlayState extends State implements Updater<Updatable>, Drawer<Drawable> {
 
 	private int tickCount;
 
@@ -52,8 +52,8 @@ public class PlayState extends State implements Updater<Updatable>, Drawer<Drawa
 		// entity manager initialization
 		EntityManager entityManager = new EntityManager();
 
-    // recipe manager initialization
-    RecipeManager recipeManager = new RecipeManager();
+		// recipe manager initialization
+		RecipeManager recipeManager = new RecipeManager();
     
 		// map initialization
 		Map map = new Map(100, 100 );
@@ -64,11 +64,7 @@ public class PlayState extends State implements Updater<Updatable>, Drawer<Drawa
 		// add all drawables
 		addDrawable( stageManager );
 
-		// set the appropriate update receivers
-		setReceiver( map );
-		setReceiver( stageManager );
-
-		getStageUpdateReceiver().addActor( map.getActor() );
+		stageManager.addActor( map.getActor() );
 //		entities.add( new Player( new Vector2( 3, 3 ) ) );
 
 		tickCount = 0;
@@ -76,7 +72,9 @@ public class PlayState extends State implements Updater<Updatable>, Drawer<Drawa
 		recipeManager.setProvider(map);
 		recipeManager.setReceiver(map);
 		recipeManager.addRecipe(RecipeBuilder.getBarnRecipe());
-		
+
+		this.mapUpdateReceiver = map;
+		this.stageUpdateReceiver = stageManager;
 		this.recipeManager = recipeManager;
 		
 		map.setReceiver(recipeManager);
@@ -87,39 +85,36 @@ public class PlayState extends State implements Updater<Updatable>, Drawer<Drawa
 	 */
 	@Override
 	public void update() {
-
-		MapUpdateReceiver mapReceiver = getMapUpdateReceiver();
-
 		if (tickCount % 60 == 0) {
 			Item wood = new Resource(new Sprite(Item.wood), "wood", 1);
 			if (tickCount / 60 == 1) { 
-				mapReceiver.setItem(3, 3, wood);
+				mapUpdateReceiver.setItem(3, 3, wood);
 			}
 			if (tickCount / 60 == 2) {
-				mapReceiver.setItem(3, 4, wood);
+				mapUpdateReceiver.setItem(3, 4, wood);
 			}
 			if (tickCount / 60 == 3) {
-				mapReceiver.setItem(3, 5, wood);
+				mapUpdateReceiver.setItem(3, 5, wood);
 			}
 
 			if (tickCount / 60 == 4) {
-				mapReceiver.setItem(4, 3, wood);
+				mapUpdateReceiver.setItem(4, 3, wood);
 			}
 			if (tickCount / 60 == 5) {
-				mapReceiver.setItem(4, 4, wood);
+				mapUpdateReceiver.setItem(4, 4, wood);
 			}
 			if (tickCount / 60 == 6) {
-				mapReceiver.setItem(4, 5, wood);
+				mapUpdateReceiver.setItem(4, 5, wood);
 			}
 
 			if (tickCount / 60 == 7) {
-				mapReceiver.setItem(5, 3, wood);
+				mapUpdateReceiver.setItem(5, 3, wood);
 			}
 			if (tickCount / 60 == 8) {
-				mapReceiver.setItem(5, 4, wood);
+				mapUpdateReceiver.setItem(5, 4, wood);
 			}
 			if (tickCount / 60 == 9) {
-				mapReceiver.setItem(5, 5, wood);
+				mapUpdateReceiver.setItem(5, 5, wood);
 			}
 			if (tickCount / 60 == 10) {
 				Blueprint blueprint = recipeManager.getBuildableBlueprint(3, 3, wood);
@@ -129,7 +124,7 @@ public class PlayState extends State implements Updater<Updatable>, Drawer<Drawa
 		
 		tickCount++;
 		
-		getStageUpdateReceiver().act();
+		stageUpdateReceiver.act();
 	}
 
 	/**
@@ -149,7 +144,7 @@ public class PlayState extends State implements Updater<Updatable>, Drawer<Drawa
 	 */
 	@Override
 	public void dispose() {
-		getStageUpdateReceiver().dispose();
+		stageUpdateReceiver.dispose();
 	}
 
 	/**
@@ -159,7 +154,7 @@ public class PlayState extends State implements Updater<Updatable>, Drawer<Drawa
 	 */
 	@Override
 	public void resize( int width, int height ) {
-		getStageUpdateReceiver().resize( width, height );
+		stageUpdateReceiver.resize( width, height );
 	}
 
 	/**
@@ -216,41 +211,5 @@ public class PlayState extends State implements Updater<Updatable>, Drawer<Drawa
 	@Override
 	public Iterator<Drawable> getDrawables() {
 		return drawables.iterator();
-	}
-
-	/**
-	 * Sets the StageUpdateReceiver
-	 * @param receiver The StageUpdateReceiver to use
-	 */
-	@Override
-	public void setReceiver( StageUpdateReceiver receiver ) {
-		this.stageUpdateReceiver = receiver;
-	}
-
-	/**
-	 * Gets the StageUpdateReceiver
-	 * @return The StageUpdateReceiver
-	 */
-	@Override
-	public StageUpdateReceiver getStageUpdateReceiver() {
-		return this.stageUpdateReceiver;
-	}
-
-	/**
-	 * Sets the MapUpdateReceiver
-	 * @param receiver The MapUpdateReceiver to use
-	 */
-	@Override
-	public void setReceiver( MapUpdateReceiver receiver ) {
-		this.mapUpdateReceiver = receiver;
-	}
-
-	/**
-	 * Gets the MapUpdateReceiver
-	 * @return The MapUpdateReceiver
-	 */
-	@Override
-	public MapUpdateReceiver getMapUpdateReceiver() {
-		return this.mapUpdateReceiver;
 	}
 }

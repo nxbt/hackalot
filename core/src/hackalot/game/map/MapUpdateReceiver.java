@@ -32,14 +32,4 @@ public interface MapUpdateReceiver {
 	 * @param buildingTile The new buildingTile.
 	 */
 	abstract public void setBuildingTile(int x, int y, BuildingTile buildingTile);
-
-	/**
-	 * TODO: should this be here? I needed it to get PlayState to work.
-	 * TODO: if this should be here, write a javadoc header
-	 * @param x
-	 * @param y
-	 * @param item
-	 * @return
-	 */
-	Blueprint getBuildableBlueprint( int x, int y, Item item );
 }
