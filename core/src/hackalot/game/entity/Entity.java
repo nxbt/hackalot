@@ -18,8 +18,7 @@ public abstract class Entity implements EntityUpdateSender, EntityInfoQuerier, U
 
 	private Actor actor;
 
-	private EntityUpdateReceiver receiver;
-
+	private EntityUpdateReceiver entityUpdateReceiver;
 	private EntityInfoProvider provider;
 
 	public Entity( Vector2 position ) {
@@ -80,15 +79,17 @@ public abstract class Entity implements EntityUpdateSender, EntityInfoQuerier, U
 
 	/**
 	 * Getters and setters for the receiver
-	 * @return
 	 */
-	public EntityUpdateReceiver getReceiver(){ return this.receiver; }
-	public void setReceiver(EntityUpdateReceiver entity){ this.receiver = entity; }
+	@Override
+	public EntityUpdateReceiver getEntityUpdateReceiver(){ return this.entityUpdateReceiver; }
+	@Override
+	public void setReceiver( EntityUpdateReceiver entity){ this.entityUpdateReceiver = entity; }
 
 	/**
 	 * Getters and setters for the InfoProvider
-	 * @return
 	 */
+	@Override
 	public EntityInfoProvider getEntityInfoProvider(){ return this.provider; }
+	@Override
 	public void setProvider(EntityInfoProvider provider){ this.provider = provider; }
 }
