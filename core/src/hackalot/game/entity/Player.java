@@ -3,8 +3,7 @@ package hackalot.game.entity;
 import com.badlogic.gdx.math.Vector2;
 import hackalot.game.SpriteActor;
 import hackalot.game.controller.PlayerController;
-
-import static hackalot.game.ref.Ref.R;
+import hackalot.game.ref.Ref;
 
 /**
  * Will represent the player
@@ -18,7 +17,7 @@ public class Player extends Character {
 
 		this.controller = new PlayerController();
 
-		setMaxHealth( R.player.max_health );
+		setMaxHealth( Ref.Player.MAX_HEALTH );
 		setActor( new SpriteActor( "badlogic.jpg" ) );
 	}
 

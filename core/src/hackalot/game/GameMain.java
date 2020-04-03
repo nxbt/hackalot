@@ -3,9 +3,6 @@ package hackalot.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import hackalot.game.state.StateManager;
 
-import static hackalot.game.ref.Ref.R;
-
-
 public class GameMain extends ApplicationAdapter {
 
 	private StateManager stateManager;
