@@ -10,7 +10,7 @@ import static hackalot.game.ref.Ref.R;
  * Manages the current state of the game, from main menu to in-game
  * @author Brendan
  */
-public class StateManager implements Updatable, Drawable, Disposable {
+public class StateManager implements Updatable, Drawable, Disposable, StateUpdateReceiver {
 
 	private State state;
 
@@ -25,9 +25,13 @@ public class StateManager implements Updatable, Drawable, Disposable {
 	 * Changes the current game state to a new state
 	 * @param state The state to change to
 	 */
+	@Override
 	public void changeState( State state ) {
 		this.state.dispose();
 		this.state = state;
+
+		// Ensures the receiver for the new state is this StateManager
+		this.state.setReceiver( this );
 	}
 
 	/**

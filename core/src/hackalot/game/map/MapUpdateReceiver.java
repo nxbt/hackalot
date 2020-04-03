@@ -1,5 +1,6 @@
 package hackalot.game.map;
 
+import hackalot.game.crafting.Blueprint;
 import hackalot.game.item.Item;
 
 /**
@@ -31,5 +32,4 @@ public interface MapUpdateReceiver {
 	 * @param buildingTile The new buildingTile.
 	 */
 	abstract public void setBuildingTile(int x, int y, BuildingTile buildingTile);
-	
 }

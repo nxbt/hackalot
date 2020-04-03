@@ -1,10 +1,12 @@
 package hackalot.game.stage;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import hackalot.game.map.MapUpdateReceiver;
 
-public interface StageUpdateReceiver {
+public interface StageUpdateReceiver extends Disposable {
 	
 	/**
 	 * Adds an actor to the stage
@@ -26,5 +28,6 @@ public interface StageUpdateReceiver {
 	 */
 	public void setViewport(Viewport view);
 	public void act();
-	public void draw();
+
+	void resize( int width, int height );
 }

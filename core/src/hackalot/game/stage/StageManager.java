@@ -4,8 +4,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import hackalot.game.Drawable;
 
-public class StageManager implements StageUpdateReceiver{
+public class StageManager implements StageUpdateReceiver, Drawable {
 	private Stage stage;
 
 	/**
@@ -18,9 +19,7 @@ public class StageManager implements StageUpdateReceiver{
 	
 	@Override
 	public void addActor(Actor actor) {
-		// TODO Auto-generated method stub
-		stage.addActor(actor);;
-		
+		stage.addActor(actor);
 	}
 
 	/**
@@ -49,6 +48,16 @@ public class StageManager implements StageUpdateReceiver{
 		
 	}
 
+	/**
+	 * TODO: is this how we want to handle resize events for stage?
+	 * @param width
+	 * @param height
+	 */
+	@Override
+	public void resize( int width, int height ) {
+		stage.getViewport().update( width, height, true );
+	}
+
 
 	@Override
 	public void draw() {
@@ -56,4 +65,11 @@ public class StageManager implements StageUpdateReceiver{
 		
 	}
 
+	/**
+	 * TODO: is this how we want to dispose of stage?
+	 */
+	@Override
+	public void dispose() {
+		stage.dispose();
+	}
 }

@@ -7,25 +7,27 @@ import static hackalot.game.ref.Ref.R;
 
 
 public class GameMain extends ApplicationAdapter {
-	
+
+	private StateManager stateManager;
+
 	@Override
 	public void create () {
-		R.sc = new StateManager();
+		this.stateManager = new StateManager();
 	}
 
 	@Override
 	public void render() {
-		R.sc.update();
-		R.sc.draw();
+		this.stateManager.update();
+		this.stateManager.draw();
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		R.sc.resize( width, height );
+		this.stateManager.resize( width, height );
 	}
 
 	@Override
 	public void dispose () {
-		R.sc.dispose();
+		this.stateManager.dispose();
 	}
 }
