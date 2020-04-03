@@ -4,8 +4,6 @@ import com.badlogic.gdx.utils.Disposable;
 import hackalot.game.Drawable;
 import hackalot.game.Updatable;
 
-import static hackalot.game.ref.Ref.R;
-
 /**
  * Manages the current state of the game, from main menu to in-game
  * @author Brendan
