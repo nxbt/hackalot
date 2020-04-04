@@ -1,5 +1,8 @@
 package hackalot.game.value;
 
-public interface ReadValue<T> {
+import hackalot.game.observer.Observable;
+import hackalot.game.observer.Observer;
+
+public interface ReadValue<T> extends Observable<Observer<ReadValue<T>>> {
 	abstract public T get();
 }

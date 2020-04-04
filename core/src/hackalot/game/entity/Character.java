@@ -6,6 +6,7 @@ import hackalot.game.controller.Controller;
 import hackalot.game.item.Item;
 import hackalot.game.map.Map;
 import hackalot.game.map.Tile;
+import hackalot.game.ref.Ref;
 
 /**
  * Parent class for Player, Enemy, and Animal. Has main functionality for our characters
@@ -20,9 +21,12 @@ public abstract class Character extends Entity {
 	private int maxHealth;
 	private int health;
 	private Item item;
+	
+	private Vector2 moveDirection;
 
 	public Character( Vector2 position ) {
 		super(position);
+		moveDirection = new Vector2();
 	}
 	
 	public Character(Vector2 position, Vector2 velocity, String name, int health) {
@@ -30,6 +34,8 @@ public abstract class Character extends Entity {
 
 		this.name = name;
 		setMaxHealth( health );
+		
+		moveDirection = new Vector2();
 	}
 
 	public void setMaxHealth( int maxHealth ) {
@@ -102,6 +108,19 @@ public abstract class Character extends Entity {
 	}
 	
 	/**
+	 * Sets the direction
+	 */
+	public void setMoveDirection(Vector2 moveDireciton) {
+		this.moveDirection = moveDireciton;
+		this.moveDirection.setLength(Ref.Player.MOVE_SPEED);
+		System.out.println("Move Direction of " + getName() + " set to " + moveDireciton);
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	/**
 	 * Returns the tile 1 tile in the direction of the velocity.
 	 * @param map
 	 * @return
@@ -119,8 +138,14 @@ public abstract class Character extends Entity {
 	public void setItem(Item item) {
 		this.item = item;
 	}
+	
 	public Item getItem() {
 		return item;
+	}
+
+	@Override
+	public void update() {
+		this.move(moveDirection);
 	}
 
 }

@@ -67,6 +67,7 @@ public abstract class Entity implements EntityUpdateSender, EntityInfoQuerier, U
 	}
 	public void setPosition(Vector2 position) {
 		this.position = position;
+		actor.setPosition(position.x, position.y);
 	}
 	
 	public void accelerate(Vector2 acceleration) {

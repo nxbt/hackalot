@@ -1,6 +1,7 @@
 package hackalot.game.state;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import hackalot.game.Drawable;
@@ -9,6 +10,7 @@ import hackalot.game.Updatable;
 import hackalot.game.Updater;
 import hackalot.game.crafting.Blueprint;
 import hackalot.game.entity.EntityManager;
+import hackalot.game.entity.Player;
 import hackalot.game.crafting.RecipeBuilder;
 import hackalot.game.crafting.RecipeInfoProvider;
 import hackalot.game.crafting.RecipeManager;
@@ -78,6 +80,9 @@ public class PlayState extends State implements Updater<Updatable>, Drawer<Drawa
 		this.recipeManager = recipeManager;
 		
 		map.setReceiver(recipeManager);
+		entityManager.setReceiver(stageManager);
+		
+		entityManager.spawn(new Player(new Vector2()));
 	}
 
 	/**
@@ -85,6 +90,9 @@ public class PlayState extends State implements Updater<Updatable>, Drawer<Drawa
 	 */
 	@Override
 	public void update() {
+		
+		updatables.forEach(u -> u.update());
+		
 		if (tickCount % 60 == 0) {
 			Item wood = new Resource(new Sprite(Item.wood), "wood", 1);
 			if (tickCount / 60 == 1) { 
