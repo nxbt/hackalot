@@ -27,11 +27,7 @@ public class Ref {
 		LEFT(new Vector2(-1, 0)),
 		RIGHT(new Vector2(1, 0)),
 		UP(new Vector2(0, 1)),
-		DOWN(new Vector2(0, -1)),
-		LEFT_UP(new Vector2(0, -1)),
-		LEFT_DOWN(new Vector2(0, 1)),
-		RIGHT_UP(new Vector2(1, 0)),
-		RIGHT_DOWN(new Vector2(1, 0));
+		DOWN(new Vector2(0, -1));
 		
 		private Vector2 dir;
 		

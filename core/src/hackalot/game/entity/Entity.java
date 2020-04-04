@@ -16,7 +16,7 @@ import hackalot.game.map.MapUpdateSender;
  * @author HANHAN
  *
  */
-public abstract class Entity implements EntityUpdateSender, EntityInfoQuerier, MapInfoQuerier, Updatable {
+public abstract class Entity implements EntityUpdateSender, EntityInfoQuerier, MapInfoQuerier, MapUpdateSender, Updatable {
 
 	private Vector2 position;
 	private Vector2 velocity; // (1,0) right (0,1) up (-1,0) left (0,-1) bottom
@@ -24,6 +24,8 @@ public abstract class Entity implements EntityUpdateSender, EntityInfoQuerier, M
 	private Actor actor;
 	
 	private MapInfoProvider mapInfoProvider;
+	
+	private MapUpdateReceiver mapUpdateReceiver;
 	
 	private EntityUpdateReceiver entityUpdateReceiver;
 	private EntityInfoProvider provider;
@@ -116,4 +118,21 @@ public abstract class Entity implements EntityUpdateSender, EntityInfoQuerier, M
 	public MapInfoProvider getMapInfoProvider() {
 		return mapInfoProvider;
 	};
+
+
+	/**
+	 * Sets the MapUpdateReceiver that should receive updates from this MapUpdateSender.
+	 * @param receiver The new receiver.
+	 */
+	public void setReceiver(MapUpdateReceiver receiver) {
+		this.mapUpdateReceiver = receiver;
+	}
+	
+	/**
+	 * Gets the MapUpdateReceiver that is Receiving updates from this MapUpdateSender.
+	 * @return The MapUpdateReceiver.
+	 */
+	public MapUpdateReceiver getMapUpdateReceiver() {
+		return mapUpdateReceiver;
+	}
 }

@@ -80,7 +80,9 @@ public class PlayState extends State implements Updater<Updatable>, Drawer<Drawa
 		this.recipeManager = recipeManager;
 		
 		map.setReceiver(recipeManager);
+		
 		entityManager.setReceiver(stageManager);
+		entityManager.setReceiver(map);
 		entityManager.setProvider(map);
 		
 		entityManager.spawn(new Player(new Vector2()));

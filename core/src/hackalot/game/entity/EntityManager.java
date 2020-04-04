@@ -8,6 +8,8 @@ import hackalot.game.Updatable;
 import hackalot.game.Updater;
 import hackalot.game.map.MapInfoProvider;
 import hackalot.game.map.MapInfoQuerier;
+import hackalot.game.map.MapUpdateReceiver;
+import hackalot.game.map.MapUpdateSender;
 import hackalot.game.stage.StageUpdateReceiver;
 import hackalot.game.stage.StageUpdateSender;
 
@@ -16,10 +18,13 @@ import hackalot.game.stage.StageUpdateSender;
  *
  * @author Brendan
  */
-public class EntityManager implements Updater<Entity>, Updatable, EntityInfoProvider, EntityUpdateReceiver, StageUpdateSender, MapInfoQuerier {
+public class EntityManager implements Updater<Entity>, Updatable, EntityInfoProvider, EntityUpdateReceiver, StageUpdateSender, MapInfoQuerier, MapUpdateSender {
 
 	private StageUpdateReceiver stageUpdateReceiver;
+	
+	private MapUpdateReceiver mapUpdateReceiver;
 	private MapInfoProvider mapInfoProvider;
+	
 	private List<Entity> entities;
 
 	/**
@@ -87,7 +92,9 @@ public class EntityManager implements Updater<Entity>, Updatable, EntityInfoProv
 		addUpdatable( entity );
 
 		getStageUpdateReceiver().addActor( entity.getActor() );
+		entity.setReceiver(mapUpdateReceiver);
 		entity.setProvider(mapInfoProvider);
+		entity.setReceiver(this);
 	}
 
 	/**
@@ -99,6 +106,8 @@ public class EntityManager implements Updater<Entity>, Updatable, EntityInfoProv
 		if( removeUpdatable( entity ) ) {
 			getStageUpdateReceiver().removeActor( entity.getActor() );
 			entity.setProvider((MapInfoProvider) null);
+			entity.setReceiver((MapUpdateReceiver) null);
+			entity.setReceiver((EntityUpdateReceiver) null);
 		}
 	}
 
@@ -129,5 +138,15 @@ public class EntityManager implements Updater<Entity>, Updatable, EntityInfoProv
 	@Override
 	public MapInfoProvider getMapInfoProvider() {
 		return this.mapInfoProvider;
+	}
+
+	@Override
+	public void setReceiver(MapUpdateReceiver receiver) {
+		this.mapUpdateReceiver = receiver;
+	}
+
+	@Override
+	public MapUpdateReceiver getMapUpdateReceiver() {
+		return mapUpdateReceiver;
 	}
 }
