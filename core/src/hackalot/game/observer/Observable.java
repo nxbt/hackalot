@@ -11,13 +11,13 @@ public interface Observable<O> {
 
 	/**
 	 * Add o to the list of Observers to update.
-	 * @param o
+	 * @param o The O to add.
 	 */
 	abstract public void addObserver(O o);
 
 	/**
 	 * Remove o from the list of Observers to update.
-	 * @param o
+	 * @param o The O to remove.
 	 */
 	abstract public void removeObserver(O o);
 
