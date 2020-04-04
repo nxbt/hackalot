@@ -1,6 +1,5 @@
 package hackalot.game.entity;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 import hackalot.game.SpriteActor;
@@ -18,7 +17,9 @@ public class Player extends Character {
 	public Player( Vector2 position ) {
 		super( position );
 		
-		Gdx.input.setInputProcessor(new InputController(this));
+		// This feels like magic, we don't store a reference to the InputController, and yet...
+		// it controls.
+		new InputController(this);
 
 		this.controller = new PlayerController();
 

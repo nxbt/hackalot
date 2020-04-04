@@ -7,7 +7,7 @@ public class Ref {
 	public static class Player {
 		public static final int MAX_HEALTH = 3;
 		
-		public static final int MOVE_SPEED = 3;
+		public static final int MOVE_SPEED = 6;
 	}
 
 	public static class Key {

@@ -3,6 +3,7 @@ package hackalot.game.command;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 
 import hackalot.game.entity.Character;
@@ -25,6 +26,8 @@ public class InputController implements InputProcessor, KeyObservable {
 	public InputController(Character character) {
 		keyObservers = new ArrayList<KeyObserver>();
 		new InputMoveCommand(character, this).activate();
+
+		Gdx.input.setInputProcessor(this);
 	}
 
 	/**
