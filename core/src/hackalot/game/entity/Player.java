@@ -1,5 +1,8 @@
 package hackalot.game.entity;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import hackalot.game.SpriteActor;
@@ -24,7 +27,7 @@ public class Player extends Character {
 		this.controller = new PlayerController();
 
 		setMaxHealth( Ref.Player.MAX_HEALTH );
-		setActor( new SpriteActor( "badlogic.jpg" ) );
+		setActor( new SpriteActor( new Sprite(new TextureRegion(new Texture("player.png"), 0, 0, 32, 32))));
 	}
 	
 }

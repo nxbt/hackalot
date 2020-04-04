@@ -8,6 +8,8 @@ public class Ref {
 		public static final int MAX_HEALTH = 3;
 		
 		public static final int MOVE_SPEED = 6;
+		
+		public static final float REACH_DISTANCE = 1.5f;
 	}
 
 	public static class Key {

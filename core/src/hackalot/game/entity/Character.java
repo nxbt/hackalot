@@ -135,7 +135,7 @@ public abstract class Character extends Entity {
 	 * @return
 	 */
 	public Tile getTileAhead() {
-		Vector2 aheadPos = new Vector2(getPosition().x / 32, getPosition().y / 32).add(new Vector2(moveDirection).setLength(1)); //adds the velocity as a length of 1 current position
+		Vector2 aheadPos = new Vector2(getPosition().x / 32, getPosition().y / 32).add(new Vector2(moveDirection).setLength(Ref.Player.REACH_DISTANCE)); //adds the velocity as a length of 1 current position
 		System.out.println("Ahead Pos: " + aheadPos);
 		return getMapInfoProvider().getTile((int)Math.round(aheadPos.x), (int)Math.round(aheadPos.y)); //gets tile at new position with x,y rounded up to account for diag
 	}
