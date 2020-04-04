@@ -2,7 +2,12 @@ package hackalot.game.entity;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+
 import hackalot.game.Updatable;
+import hackalot.game.map.MapInfoProvider;
+import hackalot.game.map.MapInfoQuerier;
+import hackalot.game.map.MapUpdateReceiver;
+import hackalot.game.map.MapUpdateSender;
 
 
 /**
@@ -11,13 +16,15 @@ import hackalot.game.Updatable;
  * @author HANHAN
  *
  */
-public abstract class Entity implements EntityUpdateSender, EntityInfoQuerier, Updatable {
+public abstract class Entity implements EntityUpdateSender, EntityInfoQuerier, MapInfoQuerier, Updatable {
 
 	private Vector2 position;
 	private Vector2 velocity; // (1,0) right (0,1) up (-1,0) left (0,-1) bottom
 
 	private Actor actor;
-
+	
+	private MapInfoProvider mapInfoProvider;
+	
 	private EntityUpdateReceiver entityUpdateReceiver;
 	private EntityInfoProvider provider;
 
@@ -93,4 +100,20 @@ public abstract class Entity implements EntityUpdateSender, EntityInfoQuerier, U
 	public EntityInfoProvider getEntityInfoProvider(){ return this.provider; }
 	@Override
 	public void setProvider(EntityInfoProvider provider){ this.provider = provider; }
+	
+	/**
+	 * Sets the MapInfoProvider that should respond to Queries from this MapInfoQuerier.
+	 * @param provider The new MapInfoProvider.
+	 */
+	public void setProvider(MapInfoProvider provider) {
+		this.mapInfoProvider = provider;
+	};
+	
+	/**
+	 * Gets the MapInfoProvider that is responding to Queries from this MapInfoQuerier.
+	 * @return The MapInfoProvider
+	 */
+	public MapInfoProvider getMapInfoProvider() {
+		return mapInfoProvider;
+	};
 }

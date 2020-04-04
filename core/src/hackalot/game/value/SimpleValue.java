@@ -25,6 +25,15 @@ public class SimpleValue<T> implements Value<T> {
 	public SimpleValue() {
 		observables = new ArrayList<Observer<ReadValue<T>>>();
 	}
+	
+	/**
+	 * Creates a new SimpleValue. T will be inialized to the given value.
+	 * @param t The starting value of T.
+	 */
+	public SimpleValue(T t) {
+		observables = new ArrayList<Observer<ReadValue<T>>>();
+		this.t = t;
+	}
 
 	/**
 	 * Sets the value of this SimpleValue's T to t.

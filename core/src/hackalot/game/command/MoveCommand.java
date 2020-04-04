@@ -50,6 +50,7 @@ public class MoveCommand implements Command, Observer<ReadValue<Vector2>> {
 	 */
 	@Override
 	public void update(ReadValue<Vector2> o) {
+		System.out.println("Vector2: " + direction.get());
 		character.setMoveDirection(direction.get());
 	}
 

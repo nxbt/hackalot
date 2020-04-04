@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Vector2;
 
 import hackalot.game.controller.Controller;
 import hackalot.game.item.Item;
-import hackalot.game.map.Map;
 import hackalot.game.map.Tile;
 import hackalot.game.ref.Ref;
 
@@ -53,7 +52,8 @@ public abstract class Character extends Entity {
 	 * returns false if pick up unsuccessful
 	 * @param tile
 	 */
-	private boolean pickUp(Tile tile) {
+	private boolean pickUp() {
+		Tile tile = getTileAhead();
 		if (!tile.hasItem()) {
 			setItem(tile.getItem());
 			tile.setItem(null);
@@ -62,6 +62,11 @@ public abstract class Character extends Entity {
 		}
 		
 		return false; //cannot pick up; tile empty;
+	}
+	
+	public void changeItem() {
+		if(getItem() == null) pickUp();
+		else drop();
 	}
 	
 	
@@ -87,7 +92,7 @@ public abstract class Character extends Entity {
 	 */
 	private boolean drop() {
 		Item itemInHand = getItem();
-		Tile tileAhead = getTileAhead(null); //TODO: CHANGE THIS NULL TO MAP REFERENCE
+		Tile tileAhead = getTileAhead();
 		
 		if (!tileAhead.hasItem()) {
 			setItem(null);
@@ -111,7 +116,7 @@ public abstract class Character extends Entity {
 	 * Sets the direction
 	 */
 	public void setMoveDirection(Vector2 moveDireciton) {
-		this.moveDirection = moveDireciton;
+		this.moveDirection = new Vector2(moveDireciton);
 		this.moveDirection.setLength(Ref.Player.MOVE_SPEED);
 		System.out.println("Move Direction of " + getName() + " set to " + moveDireciton);
 	}
@@ -125,15 +130,11 @@ public abstract class Character extends Entity {
 	 * @param map
 	 * @return
 	 */
-	public Tile getTileAhead(Map map) {
-		
-		
-	
-		Vector2 aheadPos = getPosition().add(getVelocity().setLength(1)); //adds the velocity as a length of 1 current position
-		return map.getTile((int)Math.ceil(aheadPos.x), (int)Math.ceil(aheadPos.y)); //gets tile at new position with x,y rounded up to account for diag
+	public Tile getTileAhead() {
+		Vector2 aheadPos = new Vector2(getPosition().x / 32, getPosition().y / 32).add(new Vector2(moveDirection).setLength(1)); //adds the velocity as a length of 1 current position
+		System.out.println("Ahead Pos: " + aheadPos);
+		return getMapInfoProvider().getTile((int)Math.round(aheadPos.x), (int)Math.round(aheadPos.y)); //gets tile at new position with x,y rounded up to account for diag
 	}
-
-	
 	
 	public void setItem(Item item) {
 		this.item = item;

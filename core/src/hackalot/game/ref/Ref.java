@@ -17,6 +17,7 @@ public class Ref {
 		public static final int RIGHT = Input.Keys.D;
 
 		public static final int INTERACT = Input.Keys.SPACE;
+		public static final int CHANGE_ITEM = Input.Keys.E;
 	}
 	
 	public enum Direction {

@@ -5,10 +5,14 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.Vector2;
 
 import hackalot.game.entity.Character;
 import hackalot.game.observer.KeyObservable;
 import hackalot.game.observer.KeyObserver;
+import hackalot.game.ref.Ref;
+import hackalot.game.value.SimpleValue;
+import hackalot.game.value.Value;
 
 /**
  * InputController controls a Character based on Keyboard input.
@@ -25,7 +29,18 @@ public class InputController implements InputProcessor, KeyObservable {
 	 */
 	public InputController(Character character) {
 		keyObservers = new ArrayList<KeyObserver>();
-		new InputMoveCommand(character, this).activate();
+		
+		Value<Vector2> direction = new SimpleValue<Vector2>();
+		direction.set(new Vector2());
+		new KeyPressedCommand(this, Ref.Key.LEFT, new IncreaseVectorCommand(direction, new SimpleValue<Vector2>(Ref.Direction.LEFT.getVector2()))).activate();
+		new KeyPressedCommand(this, Ref.Key.RIGHT, new IncreaseVectorCommand(direction, new SimpleValue<Vector2>(Ref.Direction.RIGHT.getVector2()))).activate();
+		new KeyPressedCommand(this, Ref.Key.UP, new IncreaseVectorCommand(direction, new SimpleValue<Vector2>(Ref.Direction.UP.getVector2()))).activate();
+		new KeyPressedCommand(this, Ref.Key.DOWN, new IncreaseVectorCommand(direction, new SimpleValue<Vector2>(Ref.Direction.DOWN.getVector2()))).activate();
+		new KeyPressedCommand(this, Ref.Key.CHANGE_ITEM, new ChangeItemCommand(character)).activate();
+
+		new MoveCommand(character, direction).activate();
+		
+		//new InputMoveCommand(character, this).activate();
 
 		Gdx.input.setInputProcessor(this);
 	}
