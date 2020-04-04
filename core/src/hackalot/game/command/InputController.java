@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 
+import hackalot.game.activater.Activatable;
+import hackalot.game.activater.Activater;
 import hackalot.game.entity.Character;
 import hackalot.game.observer.KeyObservable;
 import hackalot.game.observer.KeyObserver;
@@ -19,33 +22,58 @@ import hackalot.game.value.Value;
  * @author ethan
  *
  */
-public class InputController implements InputProcessor, KeyObservable {
+public class InputController implements Controller, Activater, InputProcessor, KeyObservable {
 
 	private List<KeyObserver> keyObservers;
+	private List<Activatable> activatables;
 	
 	/**
 	 * Constructs a new InputController to control the given Character.
 	 * @param character
 	 */
 	public InputController(Character character) {
-		
+
 		keyObservers = new ArrayList<KeyObserver>();
+		activatables = new ArrayList<Activatable>();
 		
 		Value<Vector2> direction = new SimpleValue<Vector2>();
 		direction.set(new Vector2());
 		
-		new KeyPressedCommand(this, Ref.Key.LEFT, new IncreaseVectorCommand(direction, new SimpleValue<Vector2>(Ref.Direction.LEFT.getVector2()))).activate();
-		new KeyPressedCommand(this, Ref.Key.RIGHT, new IncreaseVectorCommand(direction, new SimpleValue<Vector2>(Ref.Direction.RIGHT.getVector2()))).activate();
-		new KeyPressedCommand(this, Ref.Key.UP, new IncreaseVectorCommand(direction, new SimpleValue<Vector2>(Ref.Direction.UP.getVector2()))).activate();
-		new KeyPressedCommand(this, Ref.Key.DOWN, new IncreaseVectorCommand(direction, new SimpleValue<Vector2>(Ref.Direction.DOWN.getVector2()))).activate();
-		new KeyPressedCommand(this, Ref.Key.CHANGE_ITEM, new ChangeItemCommand(character)).activate();
-		new KeyPressedCommand(this, Ref.Key.INTERACT, () -> character.interact()).activate(); // example of using lambda expression Command
+		new KeyPressedController(this, Ref.Key.LEFT, new IncreaseVectorController(direction, new SimpleValue<Vector2>(Ref.Direction.LEFT.getVector2()))).addActivater(this);
+		new KeyPressedController(this, Ref.Key.RIGHT, new IncreaseVectorController(direction, new SimpleValue<Vector2>(Ref.Direction.RIGHT.getVector2()))).addActivater(this);
+		new KeyPressedController(this, Ref.Key.UP, new IncreaseVectorController(direction, new SimpleValue<Vector2>(Ref.Direction.UP.getVector2()))).addActivater(this);
+		new KeyPressedController(this, Ref.Key.DOWN, new IncreaseVectorController(direction, new SimpleValue<Vector2>(Ref.Direction.DOWN.getVector2()))).addActivater(this);
+		new KeyPressedController(this, Ref.Key.CHANGE_ITEM, new ChangeItemController(character)).addActivater(this);
+		new KeyPressedController(this, Ref.Key.INTERACT, () -> character.interact()).addActivater(this);// example of using lambda expression Command
 
-		new MoveCommand(character, direction).activate();
-		
-		//new InputMoveCommand(character, this).activate();
+		new MoveController(character, direction).addActivater(this);
 
 		Gdx.input.setInputProcessor(this);
+	}
+	
+
+
+	@Override
+	public void activate() {
+		activatables.forEach(a -> a.activate());
+	}
+
+
+	@Override
+	public void deactivate() {
+		activatables.forEach(a -> a.deactivate());
+	}
+
+	@Override
+	public void addActivatable(Activatable activatable) {
+		activatables.add(activatable);
+		
+	}
+
+	@Override
+	public void removeActivatable(Activatable activatable) {
+		activatables.remove(activatable);
+		
 	}
 
 	/**
@@ -72,6 +100,8 @@ public class InputController implements InputProcessor, KeyObservable {
 	 */
 	@Override
 	public boolean keyDown(int keycode) {
+		if(keycode == Input.Keys.K) deactivate();
+		if(keycode == Input.Keys.L) activate();
 		keyObservers.forEach(x -> x.keyDown(keycode));
 		return true;
 	}
@@ -122,6 +152,9 @@ public class InputController implements InputProcessor, KeyObservable {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+
+
 	
 	
 	

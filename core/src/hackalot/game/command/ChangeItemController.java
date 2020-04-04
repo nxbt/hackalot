@@ -2,11 +2,11 @@ package hackalot.game.command;
 
 import hackalot.game.entity.Character;
 
-public class ChangeItemCommand implements Command {
+public class ChangeItemController implements Controller {
 	
 	private Character character;
 	
-	public ChangeItemCommand(Character character) {
+	public ChangeItemController(Character character) {
 		this.character = character;
 	}
 

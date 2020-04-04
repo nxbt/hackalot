@@ -54,7 +54,7 @@ public abstract class Character extends Entity {
 	 */
 	private boolean pickUp() {
 		Tile tile = getTileAhead();
-		if (!tile.hasItem()) {
+		if (tile.hasItem()) {
 			setItem(tile.getItem());
 			tile.setItem(null);
 			

@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import hackalot.game.entity.Character;
 import hackalot.game.observer.Observer;
+import hackalot.game.ref.Ref;
 import hackalot.game.value.ReadValue;
 
 /**
@@ -11,7 +12,7 @@ import hackalot.game.value.ReadValue;
  * @author ethan
  *
  */
-public class MoveCommand implements Command, Observer<ReadValue<Vector2>> {
+public class MoveController implements Controller, Observer<ReadValue<Vector2>> {
 
 	private Character character;
 	private ReadValue<Vector2> direction;
@@ -22,7 +23,7 @@ public class MoveCommand implements Command, Observer<ReadValue<Vector2>> {
 	 * @param direction The direction the character should move along. While active, changes to the
 	 * direction will be reflected in the commands given to the Character.
 	 */
-	public MoveCommand(Character character, ReadValue<Vector2> direction) {
+	public MoveController(Character character, ReadValue<Vector2> direction) {
 		this.character = character;
 		this.direction = direction;
 	}
@@ -42,6 +43,7 @@ public class MoveCommand implements Command, Observer<ReadValue<Vector2>> {
 	@Override
 	public void deactivate() {
 		direction.addObserver(this);
+		character.setMoveDirection(Ref.Direction.CENTER.getVector2());
 	}
 
 	/**

@@ -8,11 +8,11 @@ import hackalot.game.observer.KeyObserver;
  * @author ethan
  *
  */
-public class KeyPressedCommand implements Command, KeyObserver {
+public class KeyPressedController implements Controller, KeyObserver {
 	
 	private KeyObservable observable;
 	private int keyCode;
-	private Command subCommand;
+	private Controller subCommand;
 	
 	/**
 	 * Constructs a new KeyPressedCommand.
@@ -20,7 +20,7 @@ public class KeyPressedCommand implements Command, KeyObserver {
 	 * @param keyCode The keyCode to track.
 	 * @param subCommand The subCommand to activate while the key is Down.
 	 */
-	public KeyPressedCommand(KeyObservable observable, int keyCode, Command subCommand) {
+	public KeyPressedController(KeyObservable observable, int keyCode, Controller subCommand) {
 		this.observable = observable;
 		this.keyCode = keyCode;
 		this.subCommand = subCommand;
@@ -41,6 +41,7 @@ public class KeyPressedCommand implements Command, KeyObserver {
 	@Override
 	public void deactivate() {
 		observable.removeObserver(this);
+		subCommand.deactivate();
 	}
 	
 	/**

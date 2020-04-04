@@ -10,7 +10,7 @@ import hackalot.game.value.Value;
  * The IncreaseVectorCommand, increases a given Value<Vector2> by a given amount while active.
  * @author ethan
  */
-public class IncreaseVectorCommand implements Command, Observer<ReadValue<Vector2>> {
+public class IncreaseVectorController implements Controller, Observer<ReadValue<Vector2>> {
 
 	private Value<Vector2> value;
 	private Vector2 curAmount;
@@ -21,9 +21,10 @@ public class IncreaseVectorCommand implements Command, Observer<ReadValue<Vector
 	 * @param value The vector to update.
 	 * @param amount The amount to update the vector by.
 	 */
-	public IncreaseVectorCommand(Value<Vector2> value, ReadValue<Vector2> amount) {
+	public IncreaseVectorController(Value<Vector2> value, ReadValue<Vector2> amount) {
 		this.value = value;
 		this.amount = amount;
+		curAmount = new Vector2();
 	}
 
 	/**
@@ -43,6 +44,7 @@ public class IncreaseVectorCommand implements Command, Observer<ReadValue<Vector
 	public void deactivate() {
 		amount.removeObserver(this);
 		this.value.set(this.value.get().sub(this.curAmount));
+		curAmount = new Vector2();
 	}
 
 	/**
