@@ -1,7 +1,13 @@
 package hackalot.game.ref;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.badlogic.gdx.Input;
-import hackalot.game.state.StateManager;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Ref {
 	public static class Player {
@@ -15,5 +21,52 @@ public class Ref {
 		public static final int RIGHT = Input.Keys.D;
 
 		public static final int INTERACT = Input.Keys.SPACE;
+	}
+	
+	public static class Resources {
+		private static final AssetManager manager = new AssetManager();
+		
+		private final static Map<String, Map<String, TextureRegion>> map = new HashMap<String, Map<String, TextureRegion>>();
+		
+		/**
+		 * Loads some TextureRegions from a file into memory.
+		 * @param filePath The path to the file to load.
+		 * @param textureWidths The width of each texture in the file.
+		 * @param textureHeights The height of each texture in the file.
+		 * @param groupName The groupName of these textures, will be used to access the loaded TextureRegions.
+		 * @param names Array of names of each texture, starting in the upper left and going first across and then down.
+		 * 		  Will be used to access the loaded TextureRegions.
+		 */
+		public static void load(String filePath, int textureWidths, int textureHeights, String groupName, String[] names) {
+			manager.load(filePath, Texture.class);
+			manager.finishLoading();
+			
+			if(!map.containsKey(groupName)) map.put(groupName, new HashMap<String, TextureRegion>());
+			Map<String, TextureRegion> group = map.get(groupName);
+			
+			Texture texture = manager.get(filePath, Texture.class);
+			int i = 0;
+			for(int y = 0; y < texture.getHeight(); y+=textureHeights) {
+				for(int x = 0; x < texture.getWidth(); x+=textureWidths) {
+					if(i == names.length) break;
+					group.put(names[i], new TextureRegion(texture, x, y, textureWidths, textureHeights));
+					i++;
+				}
+			}
+		}
+		
+		/**
+		 * Gets a previously loaded TextureRegion.
+		 * @param groupName The groupName of the TextureRegion set during loading.
+		 * @param name The name of the TextureRegion set during loading.
+		 * @return The TextureRegion loaded with the groupName and name.
+		 */
+		public static TextureRegion getTextureRegion(String groupName, String name) {
+			return map.get(groupName).get(name);
+		}
+		
+		public static void dispose() {
+			manager.dispose();
+		}
 	}
 }

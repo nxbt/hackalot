@@ -10,13 +10,9 @@ import hackalot.game.crafting.Blueprint;
 import hackalot.game.crafting.RecipeUpdateReceiver;
 import hackalot.game.crafting.RecipeUpdateSender;
 import hackalot.game.item.Item;
+import hackalot.game.ref.Ref;
 
 public class Map implements MapUpdateReceiver, MapInfoProvider, RecipeUpdateSender {
-	
-	private static final Texture tileTextures = new Texture("tilemap.png");
-	private static final TextureRegion wood = new TextureRegion(tileTextures, 0, 0, 32, 32);
-	private static final TextureRegion bricks = new TextureRegion(tileTextures, 32, 0, 32, 32);
-	private static final TextureRegion grass = new TextureRegion(tileTextures, 32*6, 0, 32, 32);
 	
 	private int width;
 	private int height;
@@ -35,7 +31,7 @@ public class Map implements MapUpdateReceiver, MapInfoProvider, RecipeUpdateSend
 		this.height = height;
 		for(int x = 0; x < width; x++)
 			for(int y = 0; y < height; y++) {
-				Sprite sprite = new Sprite(grass);
+				Sprite sprite = new Sprite(Ref.Resources.getTextureRegion("tile", "green"));
 				tilemap[x][y] = new Tile(sprite, x, y);
 				actor.addActor(tilemap[x][y].getActor());
 			}
