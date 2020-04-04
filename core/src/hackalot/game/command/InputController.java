@@ -9,31 +9,57 @@ import hackalot.game.entity.Character;
 import hackalot.game.observer.KeyObservable;
 import hackalot.game.observer.KeyObserver;
 
+/**
+ * InputController controls a Character based on Keyboard input.
+ * @author ethan
+ *
+ */
 public class InputController implements InputProcessor, KeyObservable {
 
 	private List<KeyObserver> keyObservers;
 	
+	/**
+	 * Constructs a new InputController to control the given Character.
+	 * @param character
+	 */
 	public InputController(Character character) {
 		keyObservers = new ArrayList<KeyObserver>();
-		new InputMoveCommand(this, character).activate();
+		new InputMoveCommand(character, this).activate();
 	}
 
+	/**
+	 * Add o to the list of KeyObservers to update.
+	 * @param o
+	 */
 	@Override
 	public void addObserver(KeyObserver o) {
 		keyObservers.add(o);
 	}
 
+	/**
+	 * Remove o from the list of KeyObservers to update.
+	 * @param o
+	 */
 	@Override
 	public void removeObserver(KeyObserver o) {
 		keyObservers.remove(o);
 	}
 
+	/**
+	 * Called by LibGDX when a key is pressed down.
+	 * **DO NOT CALL**
+	 */
 	@Override
 	public boolean keyDown(int keycode) {
 		keyObservers.forEach(x -> x.keyDown(keycode));
 		return true;
 	}
 
+
+	/**
+	 * Called by LibGDX when a key is released down.
+	 * **DO NOT CALL**
+	 */
 	@Override
 	public boolean keyUp(int keycode) {
 		keyObservers.forEach(x -> x.keyUp(keycode));

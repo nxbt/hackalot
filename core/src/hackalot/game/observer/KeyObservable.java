@@ -7,7 +7,17 @@ package hackalot.game.observer;
  */
 public interface KeyObservable {
 
+
+	/**
+	 * Add o to the list of KeyObservers to update.
+	 * @param o
+	 */
 	abstract public void addObserver(KeyObserver o);
+
+	/**
+	 * Remove o from the list of KeyObservers to update.
+	 * @param o
+	 */
 	abstract public void removeObserver(KeyObserver o);
 	
 }

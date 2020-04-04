@@ -13,13 +13,16 @@ import hackalot.game.value.SimpleValue;
 import hackalot.game.value.Value;
 import hackalot.game.value.WriteValue;
 
-public class InputMoveCommand implements Command, KeyObserver, Observable<MoveCommand> {
+/**
+ * InputMoveCommand Commands a Character to move based on WASD Key Inputs.
+ * @author ethan
+ *
+ */
+public class InputMoveCommand implements Command, KeyObserver {
 	
 	private KeyObservable observable;
 	
 	private WriteValue<Vector2> direction;
-	
-	private List<MoveCommand> observers;
 
 	private MoveCommand move;
 
@@ -28,7 +31,12 @@ public class InputMoveCommand implements Command, KeyObserver, Observable<MoveCo
 	private boolean upPressed;
 	private boolean downPressed;
 	
-	public InputMoveCommand(KeyObservable observable, Character character) {
+	/**
+	 * Constructs a new InputMoveCOmmand from a Character to command and a KeyObservable to get updates from.
+	 * @param character The Character to command.
+	 * @param observable The KeyObservable to get key updates from.
+	 */
+	public InputMoveCommand(Character character, KeyObservable observable) {
 		this.observable = observable;
 		Value<Vector2> direction = new SimpleValue<Vector2>();
 		this.move = new MoveCommand(character, direction);
@@ -36,18 +44,29 @@ public class InputMoveCommand implements Command, KeyObserver, Observable<MoveCo
 		direction.set(Ref.Direction.CENTER.getVector2());
 	}
 
+	/**
+	 * Activates this command, while active, this InputMoveCommand will Observe updates from its KeyObservable and
+	 * issue commands to its Character based on those updates.
+	 */
 	@Override
 	public void activate() {
 		move.activate();
 		observable.addObserver(this);
 	}
 
+	/**
+	 * Deactivates this command, while deactive, this InputMoveCommand will not issue any commands to its Character.
+	 */
 	@Override
 	public void deactivate() {
 		move.deactivate();
 		observable.removeObserver(this);
 	}
 
+	/**
+	 * Tells this InputMoveCommand that the Key with keyCode has been pressed down.
+	 * @param keyCode The code of the pressed key.
+	 */
 	@Override
 	public void keyDown(int keyCode) {
 		switch(keyCode) {
@@ -72,6 +91,10 @@ public class InputMoveCommand implements Command, KeyObserver, Observable<MoveCo
 		}
 	}
 
+	/**
+	 * Tells this InputMoveCommand that the Key with keyCode has been released.
+	 * @param keyCode The code of the released key.
+	 */
 	@Override
 	public void keyUp(int keyCode) {
 		switch(keyCode) {
@@ -96,6 +119,7 @@ public class InputMoveCommand implements Command, KeyObserver, Observable<MoveCo
 		}
 	}
 	
+	// updates the direction based on which keys are pressed.
 	private void updateDireciton() {
 		Vector2 dir = new Vector2();
 		if(leftPressed) dir.add(Ref.Direction.LEFT.getVector2());
@@ -103,16 +127,6 @@ public class InputMoveCommand implements Command, KeyObserver, Observable<MoveCo
 		if(upPressed) dir.add(Ref.Direction.UP.getVector2());
 		if(downPressed) dir.add(Ref.Direction.DOWN.getVector2());
 		direction.set(dir);
-	}
-
-	@Override
-	public void addObserver(MoveCommand o) {
-		this.observers.add(o);
-	}
-
-	@Override
-	public void removeObserver(MoveCommand o) {
-		this.observers.remove(o);
 	}
 
 }
