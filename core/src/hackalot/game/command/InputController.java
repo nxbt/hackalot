@@ -28,15 +28,18 @@ public class InputController implements InputProcessor, KeyObservable {
 	 * @param character
 	 */
 	public InputController(Character character) {
+		
 		keyObservers = new ArrayList<KeyObserver>();
 		
 		Value<Vector2> direction = new SimpleValue<Vector2>();
 		direction.set(new Vector2());
+		
 		new KeyPressedCommand(this, Ref.Key.LEFT, new IncreaseVectorCommand(direction, new SimpleValue<Vector2>(Ref.Direction.LEFT.getVector2()))).activate();
 		new KeyPressedCommand(this, Ref.Key.RIGHT, new IncreaseVectorCommand(direction, new SimpleValue<Vector2>(Ref.Direction.RIGHT.getVector2()))).activate();
 		new KeyPressedCommand(this, Ref.Key.UP, new IncreaseVectorCommand(direction, new SimpleValue<Vector2>(Ref.Direction.UP.getVector2()))).activate();
 		new KeyPressedCommand(this, Ref.Key.DOWN, new IncreaseVectorCommand(direction, new SimpleValue<Vector2>(Ref.Direction.DOWN.getVector2()))).activate();
 		new KeyPressedCommand(this, Ref.Key.CHANGE_ITEM, new ChangeItemCommand(character)).activate();
+		new KeyPressedCommand(this, Ref.Key.INTERACT, () -> character.interact()).activate(); // example of using lambda expression Command
 
 		new MoveCommand(character, direction).activate();
 		

@@ -69,6 +69,10 @@ public abstract class Character extends Entity {
 		else drop();
 	}
 	
+	public void interact() {
+		System.out.println("Interacting!");
+	}
+	
 	
 	/**
 	 * This function will be used to receive an item from a non-tile source

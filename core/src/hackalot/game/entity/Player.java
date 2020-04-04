@@ -27,8 +27,4 @@ public class Player extends Character {
 		setActor( new SpriteActor( "badlogic.jpg" ) );
 	}
 	
-	private void interact() {
-		
-	}
-	
 }

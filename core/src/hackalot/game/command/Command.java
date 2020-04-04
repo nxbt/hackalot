@@ -15,5 +15,5 @@ public interface Command {
 	/**
 	 * Deactivates this command.
 	 */
-	abstract public void deactivate();
+	default public void deactivate() {}; // default so that Command can be a Functional interface and allow lambda expr.
 }
