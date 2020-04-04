@@ -22,7 +22,7 @@ public class Player extends Character {
 		
 		// This feels like magic, we don't store a reference to the InputController, and yet...
 		// it controls.
-		new InputController(this);
+		new InputController(this).activate();
 
 		this.controller = new PlayerController();
 
