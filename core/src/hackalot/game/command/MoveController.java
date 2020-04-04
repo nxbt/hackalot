@@ -16,6 +16,7 @@ public class MoveController implements Controller, Observer<ReadValue<Vector2>> 
 
 	private Character character;
 	private ReadValue<Vector2> direction;
+	private boolean active;
 	
 	/**
 	 * Constructs a new MoveCommand from a Character to command and a Vector2 to move along.
@@ -34,6 +35,7 @@ public class MoveController implements Controller, Observer<ReadValue<Vector2>> 
 	@Override
 	public void activate() {
 		direction.addObserver(this);
+		this.active = true;
 	}
 
 
@@ -44,6 +46,12 @@ public class MoveController implements Controller, Observer<ReadValue<Vector2>> 
 	public void deactivate() {
 		direction.addObserver(this);
 		character.setMoveDirection(Ref.Direction.CENTER.getVector2());
+		this.active = false;
+	}
+	
+	@Override
+	public boolean isActive() {
+		return active;
 	}
 
 	/**

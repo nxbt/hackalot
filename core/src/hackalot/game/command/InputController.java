@@ -27,6 +27,8 @@ public class InputController implements Controller, Activater, InputProcessor, K
 	private List<KeyObserver> keyObservers;
 	private List<Activatable> activatables;
 	
+	private boolean active;
+	
 	/**
 	 * Constructs a new InputController to control the given Character.
 	 * @param character
@@ -43,8 +45,8 @@ public class InputController implements Controller, Activater, InputProcessor, K
 		new KeyPressedController(this, Ref.Key.RIGHT, new IncreaseVectorController(direction, new SimpleValue<Vector2>(Ref.Direction.RIGHT.getVector2()))).addActivater(this);
 		new KeyPressedController(this, Ref.Key.UP, new IncreaseVectorController(direction, new SimpleValue<Vector2>(Ref.Direction.UP.getVector2()))).addActivater(this);
 		new KeyPressedController(this, Ref.Key.DOWN, new IncreaseVectorController(direction, new SimpleValue<Vector2>(Ref.Direction.DOWN.getVector2()))).addActivater(this);
-		new KeyPressedController(this, Ref.Key.CHANGE_ITEM, new ChangeItemController(character)).addActivater(this);
-		new KeyPressedController(this, Ref.Key.INTERACT, () -> character.interact()).addActivater(this);// example of using lambda expression Command
+		new KeyPressedController(this, Ref.Key.CHANGE_ITEM, new LambdaController<Character>(character, c -> c.changeItem())).addActivater(this);
+		new KeyPressedController(this, Ref.Key.INTERACT, new LambdaController<Character>(character, c -> c.interact())).addActivater(this);// example of using lambda expression Command
 
 		new MoveController(character, direction).addActivater(this);
 
@@ -56,12 +58,21 @@ public class InputController implements Controller, Activater, InputProcessor, K
 	@Override
 	public void activate() {
 		activatables.forEach(a -> a.activate());
+		active = true;
 	}
 
 
 	@Override
 	public void deactivate() {
-		activatables.forEach(a -> a.deactivate());
+		activatables.forEach(a -> {
+			if(a.isActive()) a.deactivate();
+		});
+		active = false;
+	}
+	
+	@Override
+	public boolean isActive() {
+		return active;
 	}
 
 	@Override
@@ -152,10 +163,5 @@ public class InputController implements Controller, Activater, InputProcessor, K
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-
-
-	
-	
 	
 }

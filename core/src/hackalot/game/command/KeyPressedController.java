@@ -13,6 +13,7 @@ public class KeyPressedController implements Controller, KeyObserver {
 	private KeyObservable observable;
 	private int keyCode;
 	private Controller subCommand;
+	private boolean active;
 	
 	/**
 	 * Constructs a new KeyPressedCommand.
@@ -33,6 +34,7 @@ public class KeyPressedController implements Controller, KeyObserver {
 	@Override
 	public void activate() {
 		observable.addObserver(this);
+		active = true;
 	}
 
 	/**
@@ -41,7 +43,13 @@ public class KeyPressedController implements Controller, KeyObserver {
 	@Override
 	public void deactivate() {
 		observable.removeObserver(this);
-		subCommand.deactivate();
+		if(subCommand.isActive()) subCommand.deactivate();
+		active = false;
+	}
+	
+	@Override
+	public boolean isActive() {
+		return active;
 	}
 	
 	/**
@@ -59,7 +67,7 @@ public class KeyPressedController implements Controller, KeyObserver {
 	 */
 	@Override
 	public void keyUp(int keyCode) {
-		if(keyCode == this.keyCode) subCommand.deactivate();
+		if(keyCode == this.keyCode && subCommand.isActive()) subCommand.deactivate();
 	}
 
 }

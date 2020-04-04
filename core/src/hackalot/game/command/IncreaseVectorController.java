@@ -16,6 +16,8 @@ public class IncreaseVectorController implements Controller, Observer<ReadValue<
 	private Vector2 curAmount;
 	private ReadValue<Vector2> amount;
 	
+	private boolean active;
+	
 	/**
 	 * Constructs a new IncreaseVectorCommand from a Value<Vetor2> to update and a ReadValue<Vector2> to update by.
 	 * @param value The vector to update.
@@ -35,6 +37,7 @@ public class IncreaseVectorController implements Controller, Observer<ReadValue<
 		this.value.set(this.value.get().add(this.amount.get()));
 		curAmount = new Vector2(this.amount.get());
 		amount.addObserver(this);
+		this.active = true;
 	}
 
 	/**
@@ -44,7 +47,12 @@ public class IncreaseVectorController implements Controller, Observer<ReadValue<
 	public void deactivate() {
 		amount.removeObserver(this);
 		this.value.set(this.value.get().sub(this.curAmount));
-		curAmount = new Vector2();
+		this.active = false;
+	}
+	
+	@Override
+	public boolean isActive() {
+		return active;
 	}
 
 	/**
