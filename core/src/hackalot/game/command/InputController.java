@@ -9,7 +9,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 
 import hackalot.game.activater.Activatable;
-import hackalot.game.activater.Activater;
 import hackalot.game.entity.Character;
 import hackalot.game.observer.KeyObservable;
 import hackalot.game.observer.KeyObserver;
@@ -22,7 +21,7 @@ import hackalot.game.value.Value;
  * @author ethan
  *
  */
-public class InputController implements Controller, Activater, InputProcessor, KeyObservable {
+public class InputController implements Controller, InputProcessor, KeyObservable {
 
 	private List<KeyObserver> keyObservers;
 	private List<Activatable> activatables;
@@ -41,14 +40,14 @@ public class InputController implements Controller, Activater, InputProcessor, K
 		Value<Vector2> direction = new SimpleValue<Vector2>();
 		direction.set(new Vector2());
 		
-		new KeyPressedController(this, Ref.Key.LEFT, new IncreaseVectorController(direction, new SimpleValue<Vector2>(Ref.Direction.LEFT.getVector2()))).addActivater(this);
-		new KeyPressedController(this, Ref.Key.RIGHT, new IncreaseVectorController(direction, new SimpleValue<Vector2>(Ref.Direction.RIGHT.getVector2()))).addActivater(this);
-		new KeyPressedController(this, Ref.Key.UP, new IncreaseVectorController(direction, new SimpleValue<Vector2>(Ref.Direction.UP.getVector2()))).addActivater(this);
-		new KeyPressedController(this, Ref.Key.DOWN, new IncreaseVectorController(direction, new SimpleValue<Vector2>(Ref.Direction.DOWN.getVector2()))).addActivater(this);
-		new KeyPressedController(this, Ref.Key.CHANGE_ITEM, new LambdaController<Character>(character, c -> c.changeItem())).addActivater(this);
-		new KeyPressedController(this, Ref.Key.INTERACT, new LambdaController<Character>(character, c -> c.interact())).addActivater(this);// example of using lambda expression Command
+		activatables.add(new KeyPressedController(this, Ref.Key.LEFT, new IncreaseVectorController(direction, new SimpleValue<Vector2>(Ref.Direction.LEFT.getVector2()))));
+		activatables.add(new KeyPressedController(this, Ref.Key.RIGHT, new IncreaseVectorController(direction, new SimpleValue<Vector2>(Ref.Direction.RIGHT.getVector2()))));
+		activatables.add(new KeyPressedController(this, Ref.Key.UP, new IncreaseVectorController(direction, new SimpleValue<Vector2>(Ref.Direction.UP.getVector2()))));
+		activatables.add(new KeyPressedController(this, Ref.Key.DOWN, new IncreaseVectorController(direction, new SimpleValue<Vector2>(Ref.Direction.DOWN.getVector2()))));
+		activatables.add(new KeyPressedController(this, Ref.Key.CHANGE_ITEM, new LambdaController<Character>(character, c -> c.changeItem())));
+		activatables.add(new KeyPressedController(this, Ref.Key.INTERACT, new LambdaController<Character>(character, c -> c.interact())));// example of using lambda expression Command
 
-		new MoveController(character, direction).addActivater(this);
+		activatables.add(new MoveController(character, direction));
 
 		Gdx.input.setInputProcessor(this);
 	}
@@ -73,18 +72,6 @@ public class InputController implements Controller, Activater, InputProcessor, K
 	@Override
 	public boolean isActive() {
 		return active;
-	}
-
-	@Override
-	public void addActivatable(Activatable activatable) {
-		activatables.add(activatable);
-		
-	}
-
-	@Override
-	public void removeActivatable(Activatable activatable) {
-		activatables.remove(activatable);
-		
 	}
 
 	/**
