@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -12,6 +13,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Ref {
 	public static class Player {
 		public static final int MAX_HEALTH = 3;
+		
+		public static final int MOVE_SPEED = 6;
+		
+		public static final float REACH_DISTANCE = 1.5f;
 	}
 
 	public static class Key {
@@ -21,6 +26,25 @@ public class Ref {
 		public static final int RIGHT = Input.Keys.D;
 
 		public static final int INTERACT = Input.Keys.SPACE;
+		public static final int CHANGE_ITEM = Input.Keys.E;
+	}
+	
+	public enum Direction {
+		CENTER(new Vector2(0, 0)),
+		LEFT(new Vector2(-1, 0)),
+		RIGHT(new Vector2(1, 0)),
+		UP(new Vector2(0, 1)),
+		DOWN(new Vector2(0, -1));
+		
+		private Vector2 dir;
+		
+		private Direction(Vector2 dir) {
+			this.dir = dir;
+		}
+		
+		public Vector2 getVector2() {
+			return dir;
+		}
 	}
 	
 	public static class Resources {

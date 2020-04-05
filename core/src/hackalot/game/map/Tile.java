@@ -39,8 +39,7 @@ public class Tile {
 	}
 	
 	public boolean hasItem() {
-		//return this.item != null;
-		return false; // delete later
+		return this.item != null;
 	}
 	
 	public Item getItem() {

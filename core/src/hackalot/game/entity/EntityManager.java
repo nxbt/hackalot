@@ -1,22 +1,30 @@
 package hackalot.game.entity;
 
-import hackalot.game.Updatable;
-import hackalot.game.Updater;
-import hackalot.game.stage.StageUpdateReceiver;
-import hackalot.game.stage.StageUpdateSender;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import hackalot.game.Updatable;
+import hackalot.game.Updater;
+import hackalot.game.map.MapInfoProvider;
+import hackalot.game.map.MapInfoQuerier;
+import hackalot.game.map.MapUpdateReceiver;
+import hackalot.game.map.MapUpdateSender;
+import hackalot.game.stage.StageUpdateReceiver;
+import hackalot.game.stage.StageUpdateSender;
 
 /**
  * Manages the creation, updating, and deletion of entities
  *
  * @author Brendan
  */
-public class EntityManager implements Updater<Entity>, Updatable, EntityInfoProvider, EntityUpdateReceiver, StageUpdateSender {
+public class EntityManager implements Updater<Entity>, Updatable, EntityInfoProvider, EntityUpdateReceiver, StageUpdateSender, MapInfoQuerier, MapUpdateSender {
 
 	private StageUpdateReceiver stageUpdateReceiver;
+	
+	private MapUpdateReceiver mapUpdateReceiver;
+	private MapInfoProvider mapInfoProvider;
+	
 	private List<Entity> entities;
 
 	/**
@@ -84,6 +92,9 @@ public class EntityManager implements Updater<Entity>, Updatable, EntityInfoProv
 		addUpdatable( entity );
 
 		getStageUpdateReceiver().addActor( entity.getActor() );
+		entity.setReceiver(mapUpdateReceiver);
+		entity.setProvider(mapInfoProvider);
+		entity.setReceiver(this);
 	}
 
 	/**
@@ -94,6 +105,9 @@ public class EntityManager implements Updater<Entity>, Updatable, EntityInfoProv
 	public void despawn( Entity entity ) {
 		if( removeUpdatable( entity ) ) {
 			getStageUpdateReceiver().removeActor( entity.getActor() );
+			entity.setProvider((MapInfoProvider) null);
+			entity.setReceiver((MapUpdateReceiver) null);
+			entity.setReceiver((EntityUpdateReceiver) null);
 		}
 	}
 
@@ -113,5 +127,26 @@ public class EntityManager implements Updater<Entity>, Updatable, EntityInfoProv
 	@Override
 	public StageUpdateReceiver getStageUpdateReceiver() {
 		return this.stageUpdateReceiver;
+	}
+
+	@Override
+	public void setProvider(MapInfoProvider provider) {
+		this.mapInfoProvider = provider;
+		
+	}
+
+	@Override
+	public MapInfoProvider getMapInfoProvider() {
+		return this.mapInfoProvider;
+	}
+
+	@Override
+	public void setReceiver(MapUpdateReceiver receiver) {
+		this.mapUpdateReceiver = receiver;
+	}
+
+	@Override
+	public MapUpdateReceiver getMapUpdateReceiver() {
+		return mapUpdateReceiver;
 	}
 }
