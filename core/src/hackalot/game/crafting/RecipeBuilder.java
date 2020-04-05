@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import hackalot.game.item.Item;
 import hackalot.game.item.Resource;
 import hackalot.game.map.BuildingTile;
+import hackalot.game.ref.Ref;
 
 /**
  * RecipeBuilding is responsible for constructing Recipes.
@@ -72,11 +73,11 @@ public class RecipeBuilder {
 	}
 	
 	public static Recipe getBarnRecipe() {
-		Item wood = new Resource(new Sprite(Item.wood), "wood", 1);
+		Item wood = new Resource(new Sprite(Ref.Resources.getTextureRegion("item", "log")), "wood", 1);
 		RecipeBuilder builder = new RecipeBuilder(wood);
 		
 		TileMatcher woodMatcher = new TileMatcher(null, wood, null);
-		TileUpdater barnUpdater = new TileUpdater("grass", null, new BuildingTile("barnWall", new TextureRegion(new Texture("tilemap.png"), 0, 0, 32, 32)));
+		TileUpdater barnUpdater = new TileUpdater("grass", null, new BuildingTile("barnWall", Ref.Resources.getTextureRegion("tile", "wood")));
 		
 		builder.addInfo(0, 0, woodMatcher, barnUpdater);
 		builder.addInfo(0, 1, woodMatcher, barnUpdater);

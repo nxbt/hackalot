@@ -15,6 +15,7 @@ import hackalot.game.crafting.RecipeManager;
 import hackalot.game.item.Item;
 import hackalot.game.item.Resource;
 import hackalot.game.map.*;
+import hackalot.game.ref.Ref;
 import hackalot.game.stage.StageManager;
 import hackalot.game.stage.StageUpdateReceiver;
 import hackalot.game.stage.StageUpdateSender;
@@ -86,7 +87,7 @@ public class PlayState extends State implements Updater<Updatable>, Drawer<Drawa
 	@Override
 	public void update() {
 		if (tickCount % 60 == 0) {
-			Item wood = new Resource(new Sprite(Item.wood), "wood", 1);
+			Item wood = new Resource(new Sprite(Ref.Resources.getTextureRegion("item", "log")), "wood", 1);
 			if (tickCount / 60 == 1) { 
 				mapUpdateReceiver.setItem(3, 3, wood);
 			}
